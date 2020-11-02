@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/acanetti/BalanceTonJson"
   },
-  "homepage": "https://github.com/acanetti/BalanceTonJson#readme",
+  "homepage": "https://acanetti.github.io/BalanceTonJson/index.html",
   "dependencies": {
     "express": "^4.17.1"
   }
