@@ -5,6 +5,12 @@ var app = express();
 
 var fetch= require('node-fetch');
 var https=require('https');
+var cors = require('cors');
+
+var corsoptions = {
+    origin:'https://acanetti.githibu.io/',
+    optionSuccessfull : 200
+}
 
 app.use(express.static('docs'));
 
@@ -17,7 +23,7 @@ app.get("/", function(req, res){
 app.get("/:name", function(req, res){
     res.send("hello : " + req.params.name );
 })
-app.get("/fetchair/shangai", function(req, res){
+app.get("/fetchair/shangai",cors(corsoptions), function(req, res){
     let url = "http://api.waqi.info/feed/shanghai/?token=demo" ;
     fetch(url)
     .then(res => res.json())
