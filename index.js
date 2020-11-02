@@ -6,6 +6,13 @@ var app = express();
 const port = process.env.PORT || 3000 ;
 
 app.get("/", function(req, res){
+    res.send("helloWorld !");
+})
+
+app.get("/:name", function(req, res){
+    res.send("hello : " + req.params.name );
+})
+app.get("/", function(req, res){
     let url = "http://api.waqi.info/feed/shanghai/?token=demo" ;
     fetch(url)
     .then(res => res.json())
