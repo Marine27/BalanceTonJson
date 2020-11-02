@@ -1,10 +1,10 @@
 'use strict'
 
 var express = require('express');
-var app = express();
-
 var fetch = require('node-fetch');
 var https = require('https');
+
+var app = express();
 
 app.use(express.static('docs'));
 
