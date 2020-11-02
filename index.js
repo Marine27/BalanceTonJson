@@ -2,7 +2,8 @@
 
 var express = require('express');
 var app = express();
-
+const monumentJson = "https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/OpendataDRAC/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json"
+const velibJson = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes"
 const port = process.env.PORT || 3000;
 
 var fetch = require('node-fetch');
@@ -27,7 +28,7 @@ app.get("/:name", function(req, res){
     res.send("hello : " + req.params.name );
 })
 app.get("/fetchair/velib", function(req, res){
-    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes" ;
+    let url = velibJson  ;
     fetch(url)
         .then(res => res.json())
         .then(json => {
@@ -36,7 +37,8 @@ app.get("/fetchair/velib", function(req, res){
         });
 })
 app.get("/requestair/velib", function(req, res){
-    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes" ;
+
+    let url = velibJson ;
     https.get(url, (resp) => {
         let data = '';
 
