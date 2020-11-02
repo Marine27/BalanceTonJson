@@ -10,7 +10,7 @@ var https = require('https');
 var cors = require('cors');
 
 var corsOptions = {
-    origin: 'https://natoine.github.io',
+    origin: 'https://acanetti.github.io',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -19,13 +19,15 @@ app.use(express.static('docs'));
 
 
 //ROUTES
-
-app.get("/:name", function(req, res) {
-    res.send("hello : " + req.params.name);
+app.get("/", function(req, res){
+    res.send("helloWorld !");
 })
 
-app.get("/fetchair/shangai", cors(corsOptions), function(req, res) {
-    let url = "http://api.waqi.info/feed/shanghai/?token=demo";
+app.get("/:name", function(req, res){
+    res.send("hello : " + req.params.name );
+})
+app.get("/fetchair/velib", function(req, res){
+    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes" ;
     fetch(url)
         .then(res => res.json())
         .then(json => {
@@ -33,9 +35,8 @@ app.get("/fetchair/shangai", cors(corsOptions), function(req, res) {
             res.send("data fetched look your console");
         });
 })
-
-app.get("/requestair/shangai", function(req, res) {
-    let url = "https://api.waqi.info/feed/shanghai/?token=demo";
+app.get("/requestair/velib", function(req, res){
+    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes" ;
     https.get(url, (resp) => {
         let data = '';
 
@@ -55,6 +56,6 @@ app.get("/requestair/shangai", function(req, res) {
     });
 })
 
-app.listen(port, function() {
+app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
 });
