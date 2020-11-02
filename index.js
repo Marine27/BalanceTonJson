@@ -5,7 +5,7 @@ var app = express();
 
 const port = process.env.PORT || 3000 ;
 
-app.get("/fetchair/shangai", function(req, res){
+app.get("/", function(req, res){
     let url = "http://api.waqi.info/feed/shanghai/?token=demo" ;
     fetch(url)
     .then(res => res.json())
@@ -14,7 +14,7 @@ app.get("/fetchair/shangai", function(req, res){
         res.send("data fetched look your console");
     });
 })
-app.get("/requestair/shangai", function(req, res){
+app.get("/", function(req, res){
     let url = "https://api.waqi.info/feed/shanghai/?token=demo" ;
     https.get(url, (resp) => {
         let data = '';
