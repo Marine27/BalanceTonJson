@@ -28,14 +28,15 @@ app.get("/:name", function(req, res){
     res.send("hello : " + req.params.name );
 })
 app.get("/fetchair/velib", function(req, res){
-    let url = velibJson  ;
+
+    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes"  ;
     fetch(url)
         .then(res => res.json())
         .then(json => {
             console.log("fetchair", json);
             res.send("data fetched look your console");
         });
-})
+}   )
 app.get("/requestair/velib", function(req, res){
 
     let url = velibJson ;
