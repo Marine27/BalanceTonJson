@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/natoine/coursUM320202021-M2.git"
+    "url": "git+https://github.com/acanetti/OpenData"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/natoine/coursUM320202021-M2/issues"
+    "url": "https://github.com/acanetti/OpenData/issues"
   },
-  "homepage": "https://github.com/natoine/coursUM320202021-M2#readme",
+  "homepage": "https://github.com/acanetti/OpenData#readme",
   "dependencies": {
     "express": "^4.17.1"
   }
