@@ -18,7 +18,7 @@ app.get("/:name", function(req, res){
     res.send("hello : " + req.params.name );
 })
 app.get("/fetchair/shangai", function(req, res){
-    let url = "http://api.waqi.info/feed/shanghai/?token=demo" ;
+    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes" ;
     fetch(url)
     .then(res => res.json())
     .then(json => {
@@ -27,7 +27,7 @@ app.get("/fetchair/shangai", function(req, res){
     });
 })
 app.get("/requestair/shangai", function(req, res){
-    let url = "https://api.waqi.info/feed/shanghai/?token=demo" ;
+    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes" ;
     https.get(url, (resp) => {
         let data = '';
 
