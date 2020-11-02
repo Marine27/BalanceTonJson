@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/natoine/BalanceTonJson.git"
+    "url": "git+https://github.com/acanetti/BalanceTonJson"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/natoine/BalanceTonJson/issues"
+    "url": "https://github.com/acanetti/BalanceTonJson"
   },
-  "homepage": "https://github.com/natoine/BalanceTonJson#readme",
+  "homepage": "https://github.com/acanetti/BalanceTonJson#readme",
   "dependencies": {
     "express": "^4.17.1"
   }
