@@ -3,8 +3,8 @@
 var express = require('express');
 var app = express();
 
-var fetch= require('node-fetch');
-var https=require('https');
+var fetch = require('node-fetch');
+var https = require('https');
 
 app.use(express.static('docs'));
 
