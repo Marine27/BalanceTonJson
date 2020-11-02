@@ -10,8 +10,8 @@ html, body {
 
     margin: 0;
     height: 100%;
-
-
+    font-family: Ubuntu;
+    overflow: hidden;
 
 }
 
@@ -60,7 +60,11 @@ html, body {
            background-color: rgba(33,39,40,0.5) ;
             max-width: 50% ;
             max-height: 90% ;}
-.TOP { grid-area: TOP; }
+.TOP { grid-area: TOP;
+    font-size: 1vw ;
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,0.4) 0%, rgba(74,86,103,0.33) 76%, rgba(54,61,62,0.4) 100%);
+       color:white ;}
 .blankarea { grid-area: blankarea; }
 
 
@@ -78,7 +82,16 @@ html, body {
 }
 
 
-#appselector{
+#appselector , #bike{
     -webkit-filter: invert(1);
     filter: invert(1);
+}
+
+.horloge{
+margin-top : 0px ;
+    margin-bottom: 0px;
+    margin-right: 40% ;
+    margin-left: 40% ;
+    font-size: 1vw;
+
 }

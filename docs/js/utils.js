@@ -1,17 +1,19 @@
-var banniere = document.getElementById('banner');
-var texte = banniere.firstElementChild;
-var tailleTexte = banniere.scrollWidth;
+
+const dayDate = ['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim'] ;
+
+function displayDate() {
 
 
-function defile(){
-    var pos = texte.style.marginLeft.replace('px','');
-    pos -= 10;
-    texte.style.marginLeft = pos+"px";
-    setTimeout(defile, 100);
-
-    if(pos < -tailleTexte){
-        pos = 200;
-    }
+    setTimeout('showDate()', 1000);
 }
+    function showDate(){
+        let date = new Date(), h = date.getHours(), m = date.getMinutes(), day = dayDate[date.getDay()];
 
-defile();
+        if (h < 10){ h = '0' + h ;}
+        if (m <10 ){m = '0' + m ;}
+        document.getElementById('timeDisplay').innerHTML = day + '. ' + h + ':' + m
+
+    }
+
+
+displayDate()
