@@ -27,9 +27,6 @@ app.use(express.static('docs'));
 
 
 //ROUTES
-app.get("/", function(req, res) {
-    res.send("helloWorld !");
-})
 
 /*
 app.get("/:name", function(req, res) {
@@ -37,26 +34,24 @@ app.get("/:name", function(req, res) {
 })
 */
 
-app.post("/fetchair/velib", cors(corsOptions),
-    function(req, res) {
-        //req.body.name
-        console.log("salut", req.body.radius);
-        let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
-        fetch(url)
-            .then(res => res.json())
-            .then(json => {
-                //console.log("fetchair", json);
-                res.send(json);
-            });
-    })
-
-app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
+app.post("/fetchair/velib", cors(corsOptions), function(req, res) {
     //req.body.name
+    console.log("radius", req.body.radius);
     let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
     fetch(url)
         .then(res => res.json())
         .then(json => {
-            console.log("fetchair", json);
+            console.log("fetchair ok");
+            res.send(json);
+        });
+})
+
+app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
+    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
+    fetch(url)
+        .then(res => res.json())
+        .then(json => {
+            console.log("velib ok");
             res.send(json);
         });
 })
@@ -67,8 +62,8 @@ app.get("/fetchair/monuments", cors(corsOptions), function(req, res) {
     fetch(url)
         .then(res => res.json())
         .then(json => {
-            console.log("fetchair", json);
-            res.send("data fetched look your console");
+            console.log("monuments ok");
+            res.send(json);
         });
 })
 
