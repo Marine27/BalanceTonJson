@@ -36,7 +36,7 @@ app.get("/fetchair/velib", function(req, res){
             console.log("fetchair", json);
             res.send(json);
         });
-}   c)
+}   )
 app.get("/requestair/velib", function(req, res){
 
     let url = velibJson ;
