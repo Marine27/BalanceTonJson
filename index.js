@@ -26,58 +26,10 @@ app.get("/", function(req, res) {
     res.send("helloWorld !");
 })
 
-/*
-app.get("/:name", function(req, res) {
-    res.send("hello : " + req.params.name);
-})
-*/
-
 
 
 app.get("/velib", cors(corsOptions), function(req, res) {
-
-    let url = velibJson;
-    fetch(url)
-        .then(res => res.json())
-        .then(json => {
-            var data=json.records
-            if (req.query.minbike != null){
-            data=data.filter(x => x['fields']["numbikesavailable"] >= req.query.minbike) ;
-            }
-
-            else if (req.query.maxbike != null){
-                data=data.filter(x => x['fields']["numbikesavailable"] <= req.query.maxbike) ;
-            }
-
-
-            if (req.query.longitude != null && req.query.latitude != null){
-                data=data.filter(function(x){
-                                    let arr= x['fields']["coordonnees_geo"] ;
-
-                                    return  arr[0] === req.query.longitude &&  arr[1] === req.query.latitude ; } ) ;
-            }
-
-
-            res.send(data)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        });
+    res.send(apiVelib(req.query))
 })
 
 
@@ -94,30 +46,43 @@ app.get("monuments", cors(corsOptions), function(req, res) {
             });
     })
 
-    /* v2 pour fetch
-    app.get("/requestair/velib", function(req, res) {
-
-        let url = velibJson;
-        https.get(url, (resp) => {
-            let data = '';
-
-            // A chunk of data has been recieved.
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
-            // The whole response has been received. Print out the result.
-            resp.on('end', () => {
-                console.log("requestair", JSON.parse(data));
-                res.send("data requested look your console");
-            });
-
-        }).on("error", (err) => {
-            console.log("Error: " + err.message);
-            res.send("nope request didnt work");
-        });
-    })
-    */
-
 app.listen(port, function() {
     console.log('Serveur listening on port ' + port);
 })
+
+
+// Function for app.get/ post request //
+// ============================================== //
+
+function apiVelib(kargs){
+    let url = velibJson;
+    fetch(url)
+        .then(res => res.json())
+        .then(json => {
+            var data=json.records
+            if (kargs.minbike != null){
+                data=data.filter(x => x['fields']["numbikesavailable"] >= req.query.minbike) ;
+                console.log(data)
+            }
+
+            if (kargs.maxbike != null){
+                data=data.filter(x => x['fields']["numbikesavailable"] <= req.query.maxbike) ;
+                console.log(data)
+            }
+
+
+            if (kargs.lon != null && kargs.lat != null && kargs.radial != null){
+                data=data.filter(function(x){
+                    let arr= x['fields']["coordonnees_geo"] ;
+                    let distance_point= (arr[0]-kargs.lon)**2 + (arr[1]-kargs.lat)**2
+                    return  distance_point < req.query.radial**2 ; } ) ;
+            }
+
+
+            return data
+
+        });
+
+
+
+}
