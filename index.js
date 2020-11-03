@@ -40,9 +40,43 @@ app.get("/velib", cors(corsOptions), function(req, res) {
     fetch(url)
         .then(res => res.json())
         .then(json => {
-            console.log(req.query.minbike)
-            json = json.records.filter(x => x['fields']['ebike'] >= req.query.minbike) ;
-            res.send(req.query.minbike);
+            var data=json.records
+            if (req.query.minbike != null){
+            data=data.filter(x => x['fields']["numbikesavailable"] >= req.query.minbike) ;
+            }
+
+            else if (req.query.maxbike != null){
+                data=data.filter(x => x['fields']["numbikesavailable"] <= req.query.maxbike) ;
+            }
+
+
+            if (req.query.longitude != null && req.query.latitude != null){
+                data=data.filter(function(x){
+                                    let arr= x['fields']["coordonnees_geo"] ;
+
+                                    return  arr[0] === req.query.longitude &&  arr[1] === req.query.latitude ; } ) ;
+            }
+
+
+            res.send(data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         });
 })
 
