@@ -26,15 +26,16 @@ app.get("/", function(req, res) {
     res.send("helloWorld !");
 })
 
-/*
+
 app.get("/:name", function(req, res) {
     res.send("hello : " + req.params.name);
 })
-*/
 
-app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
 
-        let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
+// Velib requete
+app.get("/velib", cors(corsOptions), function(req, res) {
+
+        let url = velibJson;
         fetch(url)
             .then(res => res.json())
             .then(json => {
@@ -43,9 +44,25 @@ app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
             });
     })
 
+
+
+app.get("/velib/data/:ebike", cors(corsOptions), function(req, res) {
+
+    let url = velibJson;
+    fetch(url)
+        .then(res => res.json())
+        .then(json => {
+            json = json.records.filter(x => x['fields']['ebike'] >= ebike) ;
+            res.send(json);
+        });
+})
+
+
+
+//Monuments requete
 app.get("/fetchair/monuments", cors(corsOptions), function(req, res) {
 
-        let url = "https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/OpendataDRAC/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json";
+        let url = monumentJson;
         fetch(url)
             .then(res => res.json())
             .then(json => {
