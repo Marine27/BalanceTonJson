@@ -54,7 +54,7 @@ app.get("/velib", cors(corsOptions), function(req, res) {
         .then(json => {
             console.log(req.query.minbike)
             json = json.records.filter(x => x['fields']['ebike'] >= req.query.minbike) ;
-            res.send(json);
+            res.send(req.query.minbike);
         });
 })
 
