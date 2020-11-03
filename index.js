@@ -42,6 +42,18 @@ app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
                 res.send(json);
             });
     })
+
+app.get("/fetchair/monuments", cors(corsOptions), function(req, res) {
+
+        let url = "https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/OpendataDRAC/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json";
+        fetch(url)
+            .then(res => res.json())
+            .then(json => {
+                console.log("fetchair", json);
+                res.send("data fetched look your console");
+            });
+    })
+
     /* v2 pour fetch
     app.get("/requestair/velib", function(req, res) {
 
