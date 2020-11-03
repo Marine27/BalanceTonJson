@@ -2,8 +2,7 @@
 body {
 
 
-    background-image: url('../media/backvelib.jpg');
-    background-repeat: no-repeat;
+    background: linear-gradient(#e66465, #9198e5);
     background-size: 100%;
 }
 html, body {
