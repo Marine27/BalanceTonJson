@@ -26,11 +26,11 @@ app.get("/", function(req, res) {
     res.send("helloWorld !");
 })
 
-
+/*
 app.get("/:name", function(req, res) {
     res.send("hello : " + req.params.name);
 })
-
+*/
 
 // Velib requete
 app.get("/velib", cors(corsOptions), function(req, res) {
@@ -46,13 +46,14 @@ app.get("/velib", cors(corsOptions), function(req, res) {
 
 
 
-app.get("/velib/data/:ebike", cors(corsOptions), function(req, res) {
+app.get("/velib", cors(corsOptions), function(req, res) {
 
     let url = velibJson;
     fetch(url)
         .then(res => res.json())
         .then(json => {
-            json = json.records.filter(x => x['fields']['ebike'] >= req.params.ebike) ;
+            console.log(req.query.minbike)
+            json = json.records.filter(x => x['fields']['ebike'] >= req.query.minbike) ;
             res.send(json);
         });
 })
@@ -60,7 +61,7 @@ app.get("/velib/data/:ebike", cors(corsOptions), function(req, res) {
 
 
 //Monuments requete
-app.get("/fetchair/monuments", cors(corsOptions), function(req, res) {
+app.get("monuments", cors(corsOptions), function(req, res) {
 
         let url = monumentJson;
         fetch(url)
