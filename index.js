@@ -82,14 +82,18 @@ app.listen(port, function() {
     console.log('Serveur listening on port ' + port);
 })
 
-// Radius selector with special value 0
-const lblRadius = document.getElementById("radius-val");
-const iptRadius = document.getElementById("radius");
-iptRadius.value = "0";
-iptRadius.addEventListener("input", () => {
-    const newVal = parseInt(document.getElementById("radius").value);
-    console.log("newval", newVal);
-    lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
-    setDownloadable(true);
-    console.log("fetchair", newVal);
-});
+app.listen(port, function() {
+    // Radius selector with special value 0
+    const lblRadius = document.getElementById("radius-val");
+    console.log("newval", lblRadius);
+    const iptRadius = document.getElementById("radius");
+    console.log("newval", iptRadius);
+    iptRadius.value = "0";
+    iptRadius.addEventListener("input", () => {
+        const newVal = parseInt(document.getElementById("radius").value);
+        console.log("newval", newVal);
+        lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
+        setDownloadable(true);
+        console.log("fetchair", newVal);
+    });
+})
