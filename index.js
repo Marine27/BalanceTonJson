@@ -39,7 +39,7 @@ app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
             .then(res => res.json())
             .then(json => {
                 console.log("fetchair", json);
-                res.send("data fetched look your console");
+                res.send(json);
             });
     })
     /* v2 pour fetch
