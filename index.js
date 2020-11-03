@@ -34,50 +34,62 @@ app.get("/:name", function(req, res) {
 
 app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
 
-        let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
-        fetch(url)
-            .then(res => res.json())
-            .then(json => {
-                console.log("fetchair", json);
-                res.send(json);
-            });
-    })
+    let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
+    fetch(url)
+        .then(res => res.json())
+        .then(json => {
+            console.log("fetchair", json);
+            res.send(json);
+        });
+})
 
 app.get("/fetchair/monuments", cors(corsOptions), function(req, res) {
 
-        let url = "https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/OpendataDRAC/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json";
-        fetch(url)
-            .then(res => res.json())
-            .then(json => {
-                console.log("fetchair", json);
-                res.send("data fetched look your console");
-            });
-    })
-
-    /* v2 pour fetch
-    app.get("/requestair/velib", function(req, res) {
-
-        let url = velibJson;
-        https.get(url, (resp) => {
-            let data = '';
-
-            // A chunk of data has been recieved.
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
-            // The whole response has been received. Print out the result.
-            resp.on('end', () => {
-                console.log("requestair", JSON.parse(data));
-                res.send("data requested look your console");
-            });
-
-        }).on("error", (err) => {
-            console.log("Error: " + err.message);
-            res.send("nope request didnt work");
+    let url = "https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/OpendataDRAC/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json";
+    fetch(url)
+        .then(res => res.json())
+        .then(json => {
+            console.log("fetchair", json);
+            res.send("data fetched look your console");
         });
-    })
-    */
+})
+
+/* v2 pour fetch
+app.get("/requestair/velib", function(req, res) {
+
+    let url = velibJson;
+    https.get(url, (resp) => {
+        let data = '';
+
+        // A chunk of data has been recieved.
+        resp.on('data', (chunk) => {
+            data += chunk;
+        });
+        // The whole response has been received. Print out the result.
+        resp.on('end', () => {
+            console.log("requestair", JSON.parse(data));
+            res.send("data requested look your console");
+        });
+
+    }).on("error", (err) => {
+        console.log("Error: " + err.message);
+        res.send("nope request didnt work");
+    });
+})
+*/
 
 app.listen(port, function() {
     console.log('Serveur listening on port ' + port);
 })
+
+// Radius selector with special value 0
+const lblRadius = document.getElementById("radius-val");
+const iptRadius = document.getElementById("radius");
+iptRadius.value = "0";
+iptRadius.addEventListener("input", () => {
+    const newVal = parseInt(document.getElementById("radius").value);
+    console.log("newval", newVal);
+    lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
+    setDownloadable(true);
+    console.log("fetchair", newVal);
+});
