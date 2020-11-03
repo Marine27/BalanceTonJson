@@ -32,18 +32,6 @@ app.get("/:name", function(req, res) {
 })
 */
 
-// Velib requete
-app.get("/velib", cors(corsOptions), function(req, res) {
-
-        let url = velibJson;
-        fetch(url)
-            .then(res => res.json())
-            .then(json => {
-                console.log("fetchair", json);
-                res.send(json);
-            });
-    })
-
 
 
 app.get("/velib", cors(corsOptions), function(req, res) {
