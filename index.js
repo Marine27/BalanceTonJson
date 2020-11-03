@@ -29,7 +29,7 @@ app.get("/", function(req, res) {
 
 
 app.get("/velib", cors(corsOptions), function(req, res) {
-    res.send(apiVelib(req.query))
+    res.send(apiVelib(kargs))
 })
 
 
@@ -61,12 +61,12 @@ function apiVelib(kargs){
         .then(json => {
             var data=json.records
             if (kargs.minbike != null){
-                data=data.filter(x => x['fields']["numbikesavailable"] >= req.query.minbike) ;
+                data=data.filter(x => x['fields']["numbikesavailable"] >= kargs.minbike) ;
                 console.log(data)
             }
 
             if (kargs.maxbike != null){
-                data=data.filter(x => x['fields']["numbikesavailable"] <= req.query.maxbike) ;
+                data=data.filter(x => x['fields']["numbikesavailable"] <= kargsf.maxbike) ;
                 console.log(data)
             }
 
@@ -75,7 +75,7 @@ function apiVelib(kargs){
                 data=data.filter(function(x){
                     let arr= x['fields']["coordonnees_geo"] ;
                     let distance_point= (arr[0]-kargs.lon)**2 + (arr[1]-kargs.lat)**2
-                    return  distance_point < req.query.radial**2 ; } ) ;
+                    return  distance_point < kargs.radial**2 ; } ) ;
             }
 
 
