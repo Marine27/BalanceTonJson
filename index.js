@@ -52,7 +52,7 @@ app.get("/velib/data/:ebike", cors(corsOptions), function(req, res) {
     fetch(url)
         .then(res => res.json())
         .then(json => {
-            json = json.records.filter(x => x['fields']['ebike'] >= ebike) ;
+            json = json.records.filter(x => x['fields']['ebike'] >= req.params.ebike) ;
             res.send(json);
         });
 })
