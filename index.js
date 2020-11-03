@@ -10,10 +10,11 @@ var fetch = require('node-fetch');
 var https = require('https');
 var cors = require('cors');
 
-var corsOptions = {
+/*var corsOptions = {
     origin: 'https://acanetti.github.io',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+}*/
+app.options('*', cors()) // Enabling CORS Pre-Flight
 
 //serves static files
 app.use(express.static('docs'));
@@ -30,7 +31,7 @@ app.get("/:name", function(req, res) {
 })
 */
 
-app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
+app.get("/fetchair/velib", /*cors(corsOptions),*/ function(req, res) {
 
         let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
         fetch(url)
