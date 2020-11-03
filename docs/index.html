@@ -55,6 +55,37 @@
         </div>
 
         <script type="text/javascript" src="js/utils.js"></script>
+        <script>
+            function updateAPI(radius) {
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                fetch('http://localhost:3000/fetchair/velib', {
+                    method: 'post',
+                    headers: myHeaders,
+                    body: JSON.stringify({
+                        "radius": radius
+                    })
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    console.log('data from api:', data);
+                });
+            }
+            // Radius selector with special value 0
+            const lblRadius = document.getElementById("radius-val");
+            //console.log("newval", lblRadius);
+            const iptRadius = document.getElementById("radius");
+            //console.log("newval", iptRadius);
+            iptRadius.value = "0";
+            iptRadius.addEventListener("input", () => {
+                const newVal = parseInt(document.getElementById("radius").value);
+                console.log("newval", newVal);
+                lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
+                //console.log("fetchair", newVal);
+                updateAPI(newVal)
+            });
+        </script>
+
     </div>
 </body>
 

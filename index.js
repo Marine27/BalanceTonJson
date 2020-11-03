@@ -5,15 +5,20 @@ var app = express();
 const monumentJson = "https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/OpendataDRAC/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json"
 const velibJson = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes"
 const port = process.env.PORT || 3000;
+var bodyParser = require('body-parser');
 
 var fetch = require('node-fetch');
 var https = require('https');
 var cors = require('cors');
+const { read } = require('fs');
 
 var corsOptions = {
     origin: 'https://acanetti.github.io/BalanceTonJson/',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //app.options('*', cors()) // Enabling CORS Pre-Flight
 
@@ -32,8 +37,21 @@ app.get("/:name", function(req, res) {
 })
 */
 
-app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
+app.post("/fetchair/velib", cors(corsOptions),
+    function(req, res) {
+        //req.body.name
+        console.log("salut", req.body.radius);
+        let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
+        fetch(url)
+            .then(res => res.json())
+            .then(json => {
+                //console.log("fetchair", json);
+                res.send(json);
+            });
+    })
 
+app.get("/fetchair/velib", cors(corsOptions), function(req, res) {
+    //req.body.name
     let url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes";
     fetch(url)
         .then(res => res.json())
@@ -80,20 +98,4 @@ app.get("/requestair/velib", function(req, res) {
 
 app.listen(port, function() {
     console.log('Serveur listening on port ' + port);
-})
-
-app.listen(port, function() {
-    // Radius selector with special value 0
-    const lblRadius = document.getElementById("radius-val");
-    console.log("newval", lblRadius);
-    const iptRadius = document.getElementById("radius");
-    console.log("newval", iptRadius);
-    iptRadius.value = "0";
-    iptRadius.addEventListener("input", () => {
-        const newVal = parseInt(document.getElementById("radius").value);
-        console.log("newval", newVal);
-        lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
-        setDownloadable(true);
-        console.log("fetchair", newVal);
-    });
 })
