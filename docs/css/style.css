@@ -1,9 +1,11 @@
 
 body {
-
-
     background: linear-gradient(#e66465, #9198e5);
-    background-size: 100%;
+    background-image: url('../media/background.png');
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+
 }
 html, body {
 
@@ -18,7 +20,7 @@ html, body {
     display: grid;
     grid-template-columns: 0.3fr 0.4fr 1.4fr 1.9fr;
     grid-template-rows: 0.1fr 1.9fr 1fr;
-    gap: 0px 0px;
+    gap: 0 0;
     grid-template-areas:
     "TOP TOP TOP TOP"
     "desktop files files terminal"
@@ -34,7 +36,7 @@ html, body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 0.1fr 1.9fr;
-    gap: 0px 0px;
+    gap: 0 0;
     grid-template-areas:
     "headterminal headterminal headterminal"
     "areaterminal areaterminal areaterminal";
@@ -46,7 +48,7 @@ html, body {
     display: grid;
     grid-template-columns: 0.6fr 1.4fr 1fr;
     grid-template-rows: 0.2fr 1.8fr;
-    gap: 0px 0px;
+    gap: 0 0;
     grid-template-areas:
     "headfiles headfiles headfiles"
     "choosefiles areafiles areafiles";
@@ -87,8 +89,8 @@ html, body {
 }
 
 .horloge{
-margin-top : 0px ;
-    margin-bottom: 0px;
+margin-top : 0 ;
+    margin-bottom: 0;
     margin-right: 40% ;
     margin-left: 40% ;
     font-size: 1vw;
