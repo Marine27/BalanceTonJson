@@ -31,10 +31,14 @@ Justification: Cette source est choisie car elle offre plusieurs avantages. En e
 -les coordonnées geo de la station velib: lattitude et longitude
 -"capacity" et "numberofbikesavailable" qui sont respectivement la capacité totale de la station et le nombre de velib disponibles. Parmi ceux ci, les attributs "ebike" et "mechanical" donne le nombre de velib electrique et mécaniques disponibles. 
 -"numberdockavailables" rend compte de la disponibilités des lieux de restitution des velib. 
+-"is_installed", "is_renting" et "is_returning" booléens rendant compte de l'existence de la station velib, sa capacité à preter en temps réel et à recevoir des velibs. 
+
 
 
 
 Monuments à Paris: https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/OpendataDRAC/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json
+
+Justification: 
 
 ## URL permettent de récupérer les données
 
