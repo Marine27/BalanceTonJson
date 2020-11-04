@@ -26,6 +26,14 @@ L’utilisateur a le choix du format des données retournées par le serveur que
 
 Vélib in Paris: https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes
 
+
+Justification: Cette source est choisie car elle offre plusieurs avantages. En effet, elle est strcuturée d'une manière cohérente mettant en lumère plusieurs attributs en temps réel. Parmi ces attributs: 
+-les coordonnées geo de la station velib: lattitude et longitude
+-"capacity" et "numberofbikesavailable" qui sont respectivement la capacité totale de la station et le nombre de velib disponibles. Parmi ceux ci, les attributs "ebike" et "mechanical" donne le nombre de velib electrique et mécaniques disponibles. 
+-"numberdockavailables" rend compte de la disponibilités des lieux de restitution des velib. 
+
+
+
 Monuments à Paris: https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/OpendataDRAC/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json
 
 ## URL permettent de récupérer les données
