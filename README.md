@@ -46,10 +46,9 @@ Justification:
     GET /monuments
  - Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:  
      GET /velibstations
- - Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens:  
+ - Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens, peut-être utilisé également avec des paramétres afin d'obtenir les données souhaitées (minbike,maxbike,lon,lat,radial,monument,arrondissement):  
      GET /locations
- - Requête pour récuperer données selon certains paramêtres:  
-     GET /locations?parameter (minbike,maxbike,lon,lat,radial,monument,arrondissement)
+
 
 Explication pour une requête: GET /velib renvoie la collection des stations velib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les données au format json. La requête utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données.
 
