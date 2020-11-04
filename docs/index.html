@@ -48,17 +48,18 @@
 
         </div>
         <div class="blankarea">
-            <div id="localisation">
-                <label for="address">Point de départ :</label>
-                <input type='text' id='address' />
-                <button onclick="valid_address()"> ok </button>
-                <br>
-                <br>
-                <label for="radius">Rayon de recherche</label>
-                <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
-                <small id="radius-val" class="form-text text-muted">Emprise de la zone sélectionnée</small>
+            <div id="rayon">
+                faudra mettre la la localisation + le rayon
             </div>
             <div id="custom-test"> TEST </div>
+            <label for="address">Point de départ :</label>
+            <input type='text' id='address' />
+            <button onclick="valid_address()"> ok </button>
+            <br>
+            <br>
+            <label for="radius">Rayon de recherche</label>
+            <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
+            <small id="radius-val" class="form-text text-muted">Emprise de la zone sélectionnée</small>
 
         </div>
 
@@ -102,6 +103,7 @@
             function valid_address() {
                 iptAddress.setAttribute('value', 'Paris');
                 getCoords(iptAddress.value);
+                console.log("newval lat", params.lat, ", newval long", params.long);
                 updateAPI();
             }
 
@@ -110,9 +112,9 @@
             const iptRadius = document.getElementById("radius");
             iptRadius.addEventListener("input", () => {
                 const radius = parseInt(document.getElementById("radius").value);
-                console.log("newval radius", radius);
                 lblRadius.innerHTML = radius === 0 ? "Emprise de la zone sélectionnée" : radius + "km autour du centre géométrique";
                 params.radius = radius * 1000
+                console.log("newval radius", radius);
                 updateAPI();
             });
         </script>
