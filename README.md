@@ -22,7 +22,7 @@ Lien du Scrumblr (tableau des tâches à réaliser): http://scrumblr.ca/OpenData
 On a choisi d’utiliser les données des vélibs dans la ville de Paris ainsi que celle des monuments. 
 On fait des requêtes pour récupérer tout les monuments et dans le cas des vélos nous ne récupérons que les stations concernées par la localisation renseignée par l’utilisateur afin d’avoir les données en temps réel.
 Les deux sources de données sont liées entre elles à l’aide de leur proximité géographique.
-L’utilisateur a le choix du format des données retournées par le serveur que ca soit Json ou Rdf/Xml
+L’utilisateur a le choix du format des données retournées par le serveur que ça soit Json ou Rdf/Xml grâce à la négociation de contenu.
 
 Vélib in Paris: https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes
 
