@@ -120,7 +120,7 @@ function apiVelib(kargs, json) {
     if (kargs.lon != null && kargs.lat != null && kargs.radial != null) {
         data = data.filter(function(x) {
             let arr = x["coordonnees_geo"];
-            let distance_point = CoordDist(arr[1], arr[0], kargs.lat, kargs.lon);
+            let distance_point = CoordDist(arr[0], arr[1], kargs.lat, kargs.lon);
             console.log(distance_point)
             return distance_point < kargs.radial;
         });
@@ -143,7 +143,7 @@ function apiMonument(kargs, json) {
     if (kargs.lon != null && kargs.lat != null && kargs.radial != null) {
         data = data.filter(function(x) {
             let arr = x.geometry.rings[0][0];
-            let distance_point = CoordDist(arr[0], arr[1], kargs.lat, kargs.lon);
+            let distance_point = CoordDist(arr[1], arr[0], kargs.lat, kargs.lon);
             return distance_point < kargs.radial;
         });
     }
@@ -188,7 +188,7 @@ function CoordDist(lat1, lng1, lat2, lng2){
         Math.sin(dLong / 2);
 
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    
+
 
     return R * c;
 }
