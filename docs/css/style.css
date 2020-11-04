@@ -15,6 +15,14 @@ html, body {
     overflow: hidden;
 
 }
+h1 {
+
+  color: rgb(220,220,220);
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 5%;
+
+}
 
 .grid-container {
     display: grid;
@@ -99,4 +107,56 @@ margin-top : 0 ;
 
 #rayon{
     display: none;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 200px;
+  overflow: auto;
+  z-index: 1;
+  /*background-color: rgba(0, 0, 255, 0.2);*/
+}
+.dropdown-content a {
+  color: rgb(220,220,220);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+}
+.show {display: block;}
+
+#myDropdown2{
+
+  margin-left: 25%;
+
+}
+#myDropdown4{
+  margin-top: -3%;
+}
+#myDropdown5{
+  margin-top: 1%;
+}
+
+.button {
+  background-color: #e7e7e7;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px 25px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 12px;
+}
+input[type=text], select{
+  width: auto;
+  padding: 6px 25px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
