@@ -1,11 +1,7 @@
-# OpenData
-##### projet velib x monument readme
+#Projet Open Data
 
-
-Le readMe
-
-Projet Open Data 
 Cours : V3FMI5 - Open Data et Web des données SHS
+
 Professeur : Antoine Seilles : https://github.com/natoine
 
 Membres du groupe: BOBO Florian, BOUJEMAOUI Ali,
