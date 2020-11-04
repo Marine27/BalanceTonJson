@@ -39,3 +39,12 @@ Justification:
 ## URL permettent de récupérer les données
 
 https://balance-ton-json.herokuapp.com/api?lat=48.858370&lon=2.294481&radial=900
+
+- Requête pour récuperer les monuments de Paris:
+    GET /monuments
+- Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:
+    GET /velib
+- Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens:
+    GET /api
+- Requête pour récuperer données selon certains paramêtres:
+    GET /api?parameter (minbike,maxbike,lon,lat,radial,monument,arrondissement)
