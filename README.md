@@ -13,6 +13,10 @@ GitHubPages: https://acanetti.github.io/BalanceTonJson/
 
 Page Heroku: https://balance-ton-json.herokuapp.com/
 
+Lien du trello: https://trello.com/invite/b/IOkV5OEf/187981e70f1efdc390e5afad2e006dc0/balancetonjson
+
+Lien du Scrumblr (tableau des tâches à réaliser): http://scrumblr.ca/OpenData%20la%20team%20
+
 ## Description du Projet
 
 On a choisi d’utiliser les données des vélibs dans la ville de Paris ainsi que celle des monuments. 
@@ -24,9 +28,13 @@ Vélib in Paris: https://opendata.paris.fr/api/records/1.0/search/?dataset=velib
 
 
 Justification: Cette source est choisie car elle offre plusieurs avantages. En effet, elle est strcuturée d'une manière cohérente mettant en lumère plusieurs attributs en temps réel. Parmi ces attributs: 
+
 -les coordonnées geo de la station velib: lattitude et longitude
+
 -"capacity" et "numberofbikesavailable" qui sont respectivement la capacité totale de la station et le nombre de velib disponibles. Parmi ceux ci, les attributs "ebike" et "mechanical" donne le nombre de velib electrique et mécaniques disponibles. 
+
 -"numberdockavailables" rend compte de la disponibilités des lieux de restitution des velib. 
+
 -"is_installed", "is_renting" et "is_returning" booléens rendant compte de l'existence de la station velib, sa capacité à preter en temps réel et à recevoir des velibs. 
 
 
@@ -36,15 +44,13 @@ Monuments à Paris: https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/Ope
 
 Justification: 
 
+## Exlication des requetes
+
+__1)__ GET /velib renvoie la collection des stations velib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les donnees en json. La requete utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données. 
+
+
+
+
 ## URL permettent de récupérer les données
 
 https://balance-ton-json.herokuapp.com/api?lat=48.858370&lon=2.294481&radial=900
-
-- Requête pour récuperer les monuments de Paris:
-    GET /monuments
-- Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:
-    GET /velib
-- Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens:
-    GET /api
-- Requête pour récuperer données selon certains paramêtres:
-    GET /api?parameter (minbike,maxbike,lon,lat,radial,monument,arrondissement)
