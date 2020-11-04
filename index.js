@@ -30,87 +30,94 @@ app.use(express.static('docs'));
 
 //ROUTES
 
-/*
-app.get("/:name", function(req, res) {
-    res.send("hello : " + req.params.name);
-})
-*/
 
-
-//Velib api get
+//Velib api
 app.get("/velib", cors(corsOptions), function(req, res) {
     fetch(velibJson)
         .then(res => res.json())
         .then(json => {
             let data = apiVelib(req.query, json)
-            console.log("velib get ok");
             res.send(data)
 
         });
 
 })
-
-//Velib api post
-app.post("/velib", cors(corsOptions), function(req, res) {
-    console.log("radius", req.body.radius);
-    fetch(velibJson)
-        .then(res => res.json())
-        .then(json => {
-            let data = apiVelib(req.query, json)
-            console.log("velib post ok");
-            res.send(data)
-        });
-})
-
-
 
 
 //Monuments requete
 app.get("/monuments", cors(corsOptions), function(req, res) {
-    fetch(monumentJson)
-        .then(res => res.json())
-        .then(json => {
-            let data = apiMonument(req.query, json)
-            console.log("monuments get ok");
-            res.send(data);
-
-
-        });
-})
-
-app.listen(port, function() {
-    console.log('Serveur listening on port ' + port);
-})
-
-//api full
-app.get("/api", cors(corsOptions), function(req, res) {
-
-    Promise.all([
-        fetch(velibJson),
         fetch(monumentJson)
-    ]).then(function(res) {
-        // Get a JSON object from each of the responses
-        return Promise.all(res.map(function(res) {
-            return res.json();
-        }));
-    }).then(function(data) {
-        let monfields = data[1].fields
-        let velfields = data[0].parameters.facet
+            .then(res => res.json())
+            .then(json => {
+                let data = apiMonument(req.query, json)
+                console.log("monuments get ok");
+                res.send(data);
 
 
-        data[0] = apiVelib(req.query, data[0]);
-        data[1] = apiMonument(req.query, data[1]);
+                //Monuments requete
+                app.get("/monuments", cors(corsOptions), function(req, res) {
 
-        let dataset = {
-            'data': { 'monuments': data[1], 'velib': data[0] },
-            'param': { 'monuments': monfields, 'velib': velfields }
-        };
-        res.send(dataset)
-    })
+                    app.listen(port, function() {
+                        console.log('Serveur listening on port ' + port);
+                    })
 
-})
+                    fetch(monumentJson)
+                        .then(res => res.json())
+                        .then(json => {
+
+                        })
+
+                    let data = apiMonument(req.query, json)
+                    res.send(data);
 
 
+                });
+            })
+
+        app.listen(port, function() {
+            console.log('Serveur listening on port ' + port);
+        })
+
+        //api full
+        app.get("/api", cors(corsOptions), function(req, res) {
+
+            Promise.all([
+                fetch(velibJson),
+                fetch(monumentJson)
+            ]).then(function(res) {
+                // Get a JSON object from each of the responses
+                return Promise.all(res.map(function(res) {
+                    return res.json();
+                }));
+            }).then(function(data) {
+                let monfields = data[1].fields
+                let velfields = data[0].parameters.facet
+
+
+                data[0] = apiVelib(req.query, data[0]);
+                data[1] = apiMonument(req.query, data[1]);
+
+                let dataset = {
+                    'data': { 'monuments': data[1], 'velib': data[0] },
+                    'param': { 'monuments': monfields, 'velib': velfields }
+                };
+                res.send(dataset)
+            })
+
+        })
+
+    }
+
+    if (kargs.lon != null && kargs.lat != null && kargs.radial != null) {
+        data = data.filter(function(x) {
+            let arr = x["coordonnees_geo"];
+            let distance_point = CoordDist(arr[1], arr[0], kargs.lat, kargs.lon);
+            console.log(distance_point)
+            return distance_point < kargs.radial;
+        });
+    }
+    return data;
+}
 
 // Function for app.get/ post request //
 // ============================================== //

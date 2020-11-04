@@ -7,14 +7,12 @@
 <h1> My CV </h1>
 </div>
 <script>
-    const velibJson = "https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=139&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes"
-    let promise = fetch(velibJson)
-        .then(res => res.json())
-        .then(json => {
-            console.log(json.records.filter(x => x['fields']['ebike'] < 4)) ;
+       function cos(x) { Math.cos() }
+       var cos
+       var sin = Math.sin()
+       var arcos = Math.acos()
+       var pi = Math.PI
 
-
-
-        });
+       console.log(cos(pi));
 </script>
 </body>
