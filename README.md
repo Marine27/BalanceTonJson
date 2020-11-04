@@ -45,7 +45,7 @@ Justification:
 - Requête pour récuperer les monuments de Paris:  
     GET /monuments
  - Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:  
-     GET /velib_stations
+     GET /velibstations
  - Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens:  
      GET /locations
  - Requête pour récuperer données selon certains paramêtres:  
