@@ -122,7 +122,8 @@ margin-top : 0 ;
   min-width: 200px;
   overflow: auto;
   z-index: 1;
-  /*background-color: rgba(0, 0, 255, 0.2);*/
+  background-color: rgba(0, 0, 255, 0.2);
+  border-radius: 12px;
 }
 .dropdown-content a {
   color: rgb(220,220,220);
@@ -140,9 +141,6 @@ margin-top : 0 ;
 }
 #myDropdown4{
   margin-top: -3%;
-}
-#myDropdown5{
-  margin-top: 1%;
 }
 
 .button {
