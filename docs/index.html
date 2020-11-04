@@ -24,7 +24,7 @@
             <div class="areafiles"></div>
         </div>
         <div class="desktop">
-            <a><img class="icon" src="media/firefox.png" title="Use Firefox please"></a><br>
+            <a><img class="icon" src="media/firefox.png" title="rayon" onclick="displayDiv(this.title)"></a><br>
             <a><img class="icon" src="media/appstore.png" title="Go snap, Go ubuntu"></a><br>
             <a><img class="icon" src="media/thunderbird.png" title="send us a mail"></a><br>
             <a><img class="icon" src="media/git.png" title="Our git repository is public, check it"></a><br>
@@ -48,9 +48,12 @@
 
         </div>
         <div class="blankarea">
+            <div id="rayon">
             <label for="radius">Rayon de recherche</label>
-            <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
+            <input type="range" class="custom-range" id="radius" min="100" max="20000" value="1000" onchange="set_radial(this.value)"/>
             <small id="radius-val" class="form-text text-muted">Emprise de la zone sélectionnée</small>
+            </div>
+            <div id="custom-test"> TEST </div>
 
         </div>
 

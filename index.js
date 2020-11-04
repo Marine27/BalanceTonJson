@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 //ROUTES
 
 //Velib stations requete
-app.get("/velib_stations", cors(corsOptions), function(req, res) {
+app.get("/velibstations", cors(corsOptions), function(req, res) {
     fetch(velibJson)
         .then(res => res.json())
         .then(json => {

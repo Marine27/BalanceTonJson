@@ -1,6 +1,9 @@
 
 const dayDate = ['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim'] ;
-
+var minbike = 0 ;
+var monument ;
+var radial = 0 ;
+const classdiv=['rayon','custom-test']
 function displayDate() {
 
 
@@ -17,3 +20,21 @@ function displayDate() {
 
 
 displayDate()
+
+
+const set_radial = (x) => { radial = x } ;
+function displayDiv(classname){
+    console.log(classname) ;
+    function collapse(x){
+
+        if (x === classname) {
+            document.getElementById(x).style.display = 'inline';
+        } else {
+            document.getElementById(x).style.display = 'none';
+        }
+
+    }
+        classdiv.forEach(collapse)
+
+
+                        }
