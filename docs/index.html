@@ -55,7 +55,19 @@
         </div>
 
         <script type="text/javascript" src="js/utils.js"></script>
+        <script type="text/javascript" src="js/geocoder.js"></script>
         <script>
+            // convert address to gps coordinates
+            function geocodeAdress(adress) {
+                var openStreetMapGeocoder = GeocoderJS.createGeocoder('openstreetmap');
+                openStreetMapGeocoder.geocode(adress, function(result) {
+                    let lat = result[0].latitude;
+                    let long = result[0].longitude;
+                    console.log('latitude:', lat, ', longitude:', long);
+                    return lat, long;
+                });
+            }
+
             function updateAPI(radius) {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
@@ -71,6 +83,7 @@
                     console.log('data from api:', data);
                 });
             }
+
             // Radius selector with special value 0
             const lblRadius = document.getElementById("radius-val");
             const iptRadius = document.getElementById("radius");
