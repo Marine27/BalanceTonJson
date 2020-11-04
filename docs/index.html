@@ -59,7 +59,7 @@
             function updateAPI(radius) {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
-                fetch('http://localhost:3000/fetchair/velib', {
+                fetch('http://localhost:3000/velib', {
                     method: 'post',
                     headers: myHeaders,
                     body: JSON.stringify({

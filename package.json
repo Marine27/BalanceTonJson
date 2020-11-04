@@ -1,26 +1,26 @@
 {
-  "name": "balancetonjson",
-  "version": "1.0.0",
-  "description": "# Descriptif du projet Par groupes de 5 : développer un serveur node.js hébergé sur heroku qui fournit un jeu de données produit par le croisement d'au moins de jeux de données récupérés sur le Web. Le code projet sera hébergé sur github en fork de ce projet support de cours. Vous fournirez dans le README de votre projet : * explication du choix des sources de données et de comment vous les utilisez ( quelles requêtes vous faites ) * comment vous liez les données entre elles Vous fournirez également votre API de sortie : * quelles URL proposées par votre serveur permettent de récupérer quelles données * les données devront être accessibles dans au moins deux formats ( JSON et RDF ) et votre API devra respecter les principes de la négoctiation de contenu server-driven Il faudra que vos données soient bien ouvertes c'est à dire format explicite, données complètes, et facilement accessiibles ( politique CORS permissive ).",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/acanetti/BalanceTonJson"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/acanetti/BalanceTonJson"
-  },
-  "homepage": "https://acanetti.github.io/BalanceTonJson/index.html",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.1"
-  }
+    "name": "balancetonjson",
+    "version": "1.0.0",
+    "description": "Croiser les stations velib et les monuments touristiques",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/acanetti/BalanceTonJson"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/acanetti/BalanceTonJson"
+    },
+    "homepage": "https://acanetti.github.io/BalanceTonJson/index.html",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "node-fetch": "^2.6.1"
+    }
 }
