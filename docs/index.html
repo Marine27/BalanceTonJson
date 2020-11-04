@@ -48,10 +48,15 @@
 
         </div>
         <div class="blankarea">
-            <div id="rayon">
-            <label for="radius">Rayon de recherche</label>
-            <input type="range" class="custom-range" id="radius" min="100" max="20000" value="1000" onchange="set_radial(this.value)"/>
-            <small id="radius-val" class="form-text text-muted">Emprise de la zone sélectionnée</small>
+            <div id="localisation">
+                <label for="address">Point de départ :</label>
+                <input type='text' id='address' />
+                <button onclick="valid_address()"> ok </button>
+                <br>
+                <br>
+                <label for="radius">Rayon de recherche</label>
+                <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
+                <small id="radius-val" class="form-text text-muted">Emprise de la zone sélectionnée</small>
             </div>
             <div id="custom-test"> TEST </div>
 
@@ -60,10 +65,19 @@
         <script type="text/javascript" src="js/utils.js"></script>
         <script type="text/javascript" src="js/geocoder.js"></script>
         <script>
-            function updateAPI(lat, long) {
+            // default parameters
+            let params = {
+                lat: 48.8566969,
+                long: 2.3514616,
+                radius: 1000
+            };
+            console.log(params.lat, params.long, params.radius);
+
+            //update the api
+            function updateAPI() {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
-                fetch('http://localhost:3000/locations?lon=' + long + '&lat=' + lat + '&radial=' + 1000, {
+                fetch('http://localhost:3000/locations?lon=' + params.long + '&lat=' + params.lat + '&radial=' + params.radius, {
                     method: 'get',
                     headers: myHeaders
                 }).then(function(response) {
@@ -74,23 +88,32 @@
             }
 
             // convert address to gps coordinates
-            function getCoords(adress) {
+            function getCoords(address) {
                 var openStreetMapGeocoder = GeocoderJS.createGeocoder('openstreetmap');
-                openStreetMapGeocoder.geocode(adress, function(result) {
-                    let lat = result[0].latitude;
-                    let long = result[0].longitude;
-                    updateAPI(lat, long);
+                openStreetMapGeocoder.geocode(address, function(result) {
+                    params.lat = result[0].latitude;
+                    params.long = result[0].longitude;
                 });
             }
 
-            // Radius selector with special value 0
+            // Address selection
+            const iptAddress = document.getElementById("address");
+
+            function valid_address() {
+                iptAddress.setAttribute('value', 'Paris');
+                getCoords(iptAddress.value);
+                updateAPI();
+            }
+
+            // Radius selection
             const lblRadius = document.getElementById("radius-val");
             const iptRadius = document.getElementById("radius");
-            iptRadius.value = "0";
             iptRadius.addEventListener("input", () => {
-                const newVal = parseInt(document.getElementById("radius").value);
-                console.log("newval", newVal);
-                lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
+                const radius = parseInt(document.getElementById("radius").value);
+                console.log("newval radius", radius);
+                lblRadius.innerHTML = radius === 0 ? "Emprise de la zone sélectionnée" : radius + "km autour du centre géométrique";
+                params.radius = radius * 1000
+                updateAPI();
             });
         </script>
 
