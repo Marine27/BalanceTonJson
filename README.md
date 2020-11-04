@@ -13,10 +13,6 @@ GitHubPages: https://acanetti.github.io/BalanceTonJson/
 
 Page Heroku: https://balance-ton-json.herokuapp.com/
 
-Lien du trello: https://trello.com/invite/b/IOkV5OEf/187981e70f1efdc390e5afad2e006dc0/balancetonjson
-
-Lien du Scrumblr (tableau des tâches à réaliser): http://scrumblr.ca/OpenData%20la%20team%20
-
 ## Description du Projet
 
 On a choisi d’utiliser les données des vélibs dans la ville de Paris ainsi que celle des monuments. 
@@ -44,11 +40,18 @@ Monuments à Paris: https://geoweb.iau-idf.fr/agsmap1/rest/services/OPENDATA/Ope
 
 Justification: 
 
-## Exlication des requetes
+## Liste des requêtes:
 
-__1)__ GET /velib renvoie la collection des stations velib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les donnees en json. La requete utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données. Le nombre de vélib disponibles doit etre à la fois supérieur au minimum requis. 
+- Requête pour récuperer les monuments de Paris:  
+    GET /monuments
+ - Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:  
+     GET /velib_stations
+ - Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens:  
+     GET /locations
+ - Requête pour récuperer données selon certains paramêtres:  
+     GET /locations?parameter (minbike,maxbike,lon,lat,radial,monument,arrondissement)
 
-
+Explication pour une requête: GET /velib renvoie la collection des stations velib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les données au format json. La requête utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données.
 
 
 ## URL permettent de récupérer les données
