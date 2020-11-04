@@ -90,8 +90,8 @@ app.get("/api", cors(corsOptions), function(req, res) {
         data[1] = apiMonument(req.query, data[1]);
 
         let dataset = {
-            'data': { 'monuments': data[1], 'velib': data[0] },
-            'param': { 'monuments': monfields, 'velib': velfields }
+            'data': { 'monuments': data[1], 'station_velib': data[0] },
+            'param': { 'monuments': monfields, 'station_velib': velfields }
         };
         res.send(dataset);
     })
