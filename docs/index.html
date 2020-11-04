@@ -49,7 +49,7 @@
         </div>
         <div class="blankarea">
             <label for="radius">Rayon de recherche</label>
-            <input type="range" class="custom-range" id="radius" min="0" max="50" value="0" />
+            <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
             <small id="radius-val" class="form-text text-muted">Emprise de la zone sélectionnée</small>
 
         </div>
@@ -57,24 +57,49 @@
         <script type="text/javascript" src="js/utils.js"></script>
         <script type="text/javascript" src="js/geocoder.js"></script>
         <script>
+            function updateAPI2(lat, long) {
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                fetch('http://localhost:3000/api/?lon=' + long + '&lat=' + lat + '&radial=' + 1000, {
+                    method: 'get',
+                    headers: myHeaders
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    console.log('data from api:', data);
+                });
+            }
+
             // convert address to gps coordinates
-            function geocodeAdress(adress) {
+            function getCoords(adress) {
                 var openStreetMapGeocoder = GeocoderJS.createGeocoder('openstreetmap');
                 openStreetMapGeocoder.geocode(adress, function(result) {
                     let lat = result[0].latitude;
                     let long = result[0].longitude;
-                    console.log('latitude:', lat, ', longitude:', long);
-                    return lat, long;
+                    updateAPI2(lat, long);
                 });
             }
+
+            // Radius selector with special value 0
+            const lblRadius = document.getElementById("radius-val");
+            const iptRadius = document.getElementById("radius");
+            iptRadius.value = "1";
+            iptRadius.addEventListener("input", () => {
+                const newVal = parseInt(document.getElementById("radius").value);
+                console.log("newval", newVal);
+                lblRadius.innerHTML = newVal === 1 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
+                updateAPI(newVal * 1000)
+            });
+
+
 
             function updateAPI(radius) {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
                 fetch('http://localhost:3000/velib', {
-                    method: 'post',
+                    method: 'get',
                     headers: myHeaders,
-                    body: JSON.stringify({
+                    requery: JSON.stringify({
                         "radius": radius
                     })
                 }).then(function(response) {
@@ -83,17 +108,6 @@
                     console.log('data from api:', data);
                 });
             }
-
-            // Radius selector with special value 0
-            const lblRadius = document.getElementById("radius-val");
-            const iptRadius = document.getElementById("radius");
-            iptRadius.value = "0";
-            iptRadius.addEventListener("input", () => {
-                const newVal = parseInt(document.getElementById("radius").value);
-                console.log("newval", newVal);
-                lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
-                updateAPI(newVal)
-            });
         </script>
 
     </div>
