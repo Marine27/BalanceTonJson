@@ -15,25 +15,77 @@
 <body>
     <div class="grid-container">
         <div class="terminal">
-            <div class="headterminal"></div>
+            <div class="headterminal">
+                          <div id="myDropdown3" class="dropdown-content">
+                <h1> Adresse </h1>
+                <a href="#Icone1">
+                  <form>
+                      <input type="text" class="adresse_form" id="adresse"  placeholder="Saisir l'Adresse ">
+                      <br>
+                  </form>
+                </a>
+              <a href="#Icone1">
+                <label for="radius">Rayon de recherche</label>
+                <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
+                <small id="radius-val" class="form-text text-muted">Emprise de la zone sélectionnée</small>
+              </a>
+            </div>
+            </div>
             <div class="areaterminal"></div>
         </div>
         <div class="files">
-            <div class="headfiles"></div>
-            <div class="choosefiles"></div>
+            <div class="headfiles">
+                          <div id="myDropdown1" class="dropdown-content">
+                  <h1> Vélo </h1>
+                  <a href="#Icone1">
+                    <form>
+                        <input type="text" placeholder="macxbik">
+                        <br>
+                        <input type="text" placeholder="minbike"><br>
+                        <br>
+                      <button class="button"> Envoye </button>
+                    </form>
+                </a>
+              </div>
+              <div id="myDropdown2" class="dropdown-content">
+                <h1> Monument </h1>
+                <a>
+                  <form action="/action_page.php">
+                  <select name="Monument" id="monument">
+                    <option value="m1"> monument 1 </option>
+                    <option value="m2"> monument 2</option>
+                    <option value="m3"> monument 3</option>
+                    <option value="m4"> monument  4</option>
+                  </select>
+                  <br>
+                  <br><button class="button"> Envoye </button>
+                </form>
+              </div>
+            
+            </div>
+            
+            
+            <div class="choosefiles">
+                <div id="myDropdown4" class="dropdown-content">
+                <a href="#lien_vers_json">
+                  <button class="button"> Télecharger en JSON </button>
+                </a>
+              </div>
+              <br>
+              <div id="myDropdown5" class="dropdown-content">
+                <a href="#lien_vers_rfd">
+                <button class="button"> Télecharger en RFD </button>
+              </a>
+            </div>
+            </div>
             <div class="areafiles"></div>
         </div>
         <div class="desktop">
-            <a><img class="icon" src="media/firefox.png" title="rayon" onclick="displayDiv(this.title)"></a><br>
-            <a><img class="icon" src="media/appstore.png" title="custom-test" onclick="displayDiv(this.title)"></a><br>
-            <a><img class="icon" src="media/thunderbird.png" title="send us a mail"></a><br>
-            <a><img class="icon" src="media/git.png" title="Our git repository is public, check it"></a><br>
-            <a><img class="icon" src="media/folder.png" title="API Documentation"></a><br>
-            <a><img class="icon" src="media/json.png" title="JSON structure"></a><br>
-            <a><img class="icon" src="media/rdf.png" title=" RDF structure "></a><br>
-            <a><img class="icon" src="media/natoine.png" title="Minimum 15 <3 "></a><br>
-            <a><img class="icon" src="media/terminal.png" title="Easter Egg"></a><br>
-            <a><img id="appselector" class="icon" src="media/appselector.png" title="Back to normal"></a><br>
+            <a><img onclick="myFunction1()" class="icon" src="media/firefox.png" title="Use Firefox please"></a><br>
+          <a><img onclick="myFunction2()" class="icon" src="media/appstore.png" title="Go snap, Go ubuntu"></a><br>
+          <a><img onclick="myFunction3()" class="icon" src="media/thunderbird.png" title="send us a mail"></a><br>
+          <a><img onclick="myFunction4()" class="icon" src="media/git.png" title="Our git repository is public, check it"></a><br>
+          <a><img onclick="myFunction5()" class="icon" src="media/folder.png" title="API Documentation"></a><br>
 
 
 
@@ -65,6 +117,7 @@
 
         <script type="text/javascript" src="js/utils.js"></script>
         <script type="text/javascript" src="js/geocoder.js"></script>
+        <script type="text/javascript" src="js/menu.js"></script>
         <script>
             // default parameters
             let params = {
