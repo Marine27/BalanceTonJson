@@ -120,7 +120,7 @@ function apiVelib(kargs, json) {
     if (kargs.lon != null && kargs.lat != null && kargs.radial != null) {
         data = data.filter(function(x) {
             let arr = x["coordonnees_geo"];
-            let distance_point = CoordDist(arr[1], arr[0], kargs.lat, kargs.lon);
+            let distance_point = CoordDist(arr[0], arr[1], kargs.lat, kargs.lon);
             console.log(distance_point)
             return distance_point < kargs.radial;
         });
@@ -143,7 +143,7 @@ function apiMonument(kargs, json) {
     if (kargs.lon != null && kargs.lat != null && kargs.radial != null) {
         data = data.filter(function(x) {
             let arr = x.geometry.rings[0][0];
-            let distance_point = CoordDist(arr[0], arr[1], kargs.lat, kargs.lon);
+            let distance_point = CoordDist(arr[1], arr[0], kargs.lat, kargs.lon);
             return distance_point < kargs.radial;
         });
     }
@@ -155,23 +155,40 @@ function apiMonument(kargs, json) {
 
 // Utils Fonction //
 
-function CoordDist(lat1, lon1, lat2, lon2, ) {
-    if ((lat1 == lat2) && (lon1 == lon2)) {
-        return 0;
-    } else {
-        var radlat1 = Math.PI * lat1 / 180;
-        var radlat2 = Math.PI * lat2 / 180;
-        var theta = lon1 - lon2;
-        var radtheta = Math.PI * theta / 180;
-        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-        if (dist > 1) {
-            dist = 1;
-        }
-        dist = Math.acos(dist);
-        dist = dist * 180 / Math.PI;
-        dist = dist * 60 * 1.1515;
-        dist = dist * 1.609344
 
-        return dist;
-    }
+
+function degreesToRadians(degrees){
+    return degrees * Math.PI / 180;
+}
+
+/**
+ * Returns the distance between 2 points of coordinates in Google Maps
+ *
+ * @see https://stackoverflow.com/a/1502821/4241030
+ * @param lat1 Latitude of the point A
+ * @param lng1 Longitude of the point A
+ * @param lat2 Latitude of the point B
+ * @param lng2 Longitude of the point B
+ */
+function CoordDist(lat1, lng1, lat2, lng2){
+    // The radius of the planet earth in meters
+    let R = 6378137;
+    let dLat = degreesToRadians(lat2 - lat1);
+    let dLong = degreesToRadians(lng2 - lng1);
+    let a = Math.sin(dLat / 2)
+        *
+        Math.sin(dLat / 2)
+        +
+        Math.cos(degreesToRadians(lat1))
+        *
+        Math.cos(degreesToRadians(lat1))
+        *
+        Math.sin(dLong / 2)
+        *
+        Math.sin(dLong / 2);
+
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+
+    return R * c;
 }
