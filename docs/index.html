@@ -57,10 +57,10 @@
         <script type="text/javascript" src="js/utils.js"></script>
         <script type="text/javascript" src="js/geocoder.js"></script>
         <script>
-            function updateAPI2(lat, long) {
+            function updateAPI(lat, long) {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
-                fetch('http://localhost:3000/api/?lon=' + long + '&lat=' + lat + '&radial=' + 1000, {
+                fetch('http://localhost:3000/locations?lon=' + long + '&lat=' + lat + '&radial=' + 1000, {
                     method: 'get',
                     headers: myHeaders
                 }).then(function(response) {
@@ -76,38 +76,19 @@
                 openStreetMapGeocoder.geocode(adress, function(result) {
                     let lat = result[0].latitude;
                     let long = result[0].longitude;
-                    updateAPI2(lat, long);
+                    updateAPI(lat, long);
                 });
             }
 
             // Radius selector with special value 0
             const lblRadius = document.getElementById("radius-val");
             const iptRadius = document.getElementById("radius");
-            iptRadius.value = "1";
+            iptRadius.value = "0";
             iptRadius.addEventListener("input", () => {
                 const newVal = parseInt(document.getElementById("radius").value);
                 console.log("newval", newVal);
-                lblRadius.innerHTML = newVal === 1 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
-                updateAPI(newVal * 1000)
+                lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
             });
-
-
-
-            function updateAPI(radius) {
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-                fetch('http://localhost:3000/velib', {
-                    method: 'get',
-                    headers: myHeaders,
-                    requery: JSON.stringify({
-                        "radius": radius
-                    })
-                }).then(function(response) {
-                    return response.json();
-                }).then(function(data) {
-                    console.log('data from api:', data);
-                });
-            }
         </script>
 
     </div>

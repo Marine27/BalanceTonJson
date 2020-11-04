@@ -29,8 +29,8 @@ app.use(bodyParser.json());
 
 //ROUTES
 
-//Velib api get
-app.get("/velib", cors(corsOptions), function(req, res) {
+//Velib stations requete
+app.get("/velib_stations", cors(corsOptions), function(req, res) {
     fetch(velibJson)
         .then(res => res.json())
         .then(json => {
@@ -39,20 +39,6 @@ app.get("/velib", cors(corsOptions), function(req, res) {
             res.send(data);
         });
 })
-
-/*/Velib api post
-app.post("/velib", cors(corsOptions), function(req, res) {
-    console.log("radius", req.body.radius);
-    fetch(velibJson)
-        .then(res => res.json())
-        .then(json => {
-            let data = apiVelib(req.query, json);
-            console.log("velib post ok");
-            res.send(data);
-        });
-})*/
-
-
 
 
 //Monuments requete
@@ -70,8 +56,8 @@ app.listen(port, function() {
     console.log('Serveur listening on port ' + port);
 })
 
-//api full
-app.get("/api", cors(corsOptions), function(req, res) {
+//Locations monuments and velib sations requete
+app.get("/locations", cors(corsOptions), function(req, res) {
 
     Promise.all([
         fetch(velibJson),
@@ -154,7 +140,6 @@ function apiMonument(kargs, json) {
 
 
 // Utils Fonction //
-
 
 
 function degreesToRadians(degrees) {
