@@ -46,7 +46,7 @@ Justification:
 
 ## Exlication des requetes
 
-__1)__ GET /velib renvoie la collection des stations velib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les donnees en json. La requete utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données. 
+__1)__ GET /velib renvoie la collection des stations velib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les donnees en json. La requete utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données. Le nombre de vélib disponibles doit etre à la fois supérieur au minimum requis. 
 
 
 
