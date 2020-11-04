@@ -13,10 +13,6 @@ GitHubPages: https://acanetti.github.io/BalanceTonJson/
 
 Page Heroku: https://balance-ton-json.herokuapp.com/
 
-Lien du trello: https://trello.com/invite/b/IOkV5OEf/187981e70f1efdc390e5afad2e006dc0/balancetonjson
-
-Lien du Scrumblr (tableau des tâches à réaliser): http://scrumblr.ca/OpenData%20la%20team%20
-
 ## Description du Projet
 
 On a choisi d’utiliser les données des vélibs dans la ville de Paris ainsi que celle des monuments. 
