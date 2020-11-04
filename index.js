@@ -122,9 +122,9 @@ function apiMonument(kargs, json) {
         data = data.filter(x => x.attributes.type_archi === kargs.archi);
     }
 
-    if (kargs.arrondissement != null) {
+    /*if (kargs.arrondissement != null) {
         data = data.filter(x => x.attributes.nomcom.includes(kargs.arrondissement));
-    }
+    }*/
 
     if (kargs.lon != null && kargs.lat != null && kargs.radial != null) {
         data = data.filter(function(x) {

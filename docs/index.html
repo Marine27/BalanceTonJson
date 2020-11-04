@@ -70,15 +70,24 @@
             let params = {
                 lat: 48.8566969,
                 long: 2.3514616,
-                radius: 1000
+                radius: 1000,
+                minbike: 1,
+                maxbike: 200,
+                archi: 1000
             };
             console.log(params.lat, params.long, params.radius);
 
             //update the api
             function updateAPI() {
-                var myHeaders = new Headers();
+                let myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
-                fetch('http://localhost:3000/locations?lon=' + params.long + '&lat=' + params.lat + '&radial=' + params.radius, {
+                let url = (window.location.href == "http://localhost:3000/" ? "/" : "https://balance-ton-json.herokuapp.com/")
+                url += 'locations?'
+                url += 'lon=' + params.long + '&lat=' + params.lat
+                url += '&radial=' + params.radius
+                    //url += '&minbike='+ params.minbike + '&maxbike=' + params.maxbike 
+                    //url += '&archi=' + params.archi
+                fetch(url, {
                     method: 'get',
                     headers: myHeaders
                 }).then(function(response) {
