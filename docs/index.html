@@ -47,9 +47,42 @@
 
 
         </div>
-        <div class="blankarea"></div>
+        <div class="blankarea">
+            <label for="radius">Rayon de recherche</label>
+            <input type="range" class="custom-range" id="radius" min="0" max="50" value="0" />
+            <small id="radius-val" class="form-text text-muted">Emprise de la zone sélectionnée</small>
+
+        </div>
 
         <script type="text/javascript" src="js/utils.js"></script>
+        <script>
+            function updateAPI(radius) {
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                fetch('http://localhost:3000/fetchair/velib', {
+                    method: 'post',
+                    headers: myHeaders,
+                    body: JSON.stringify({
+                        "radius": radius
+                    })
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    console.log('data from api:', data);
+                });
+            }
+            // Radius selector with special value 0
+            const lblRadius = document.getElementById("radius-val");
+            const iptRadius = document.getElementById("radius");
+            iptRadius.value = "0";
+            iptRadius.addEventListener("input", () => {
+                const newVal = parseInt(document.getElementById("radius").value);
+                console.log("newval", newVal);
+                lblRadius.innerHTML = newVal === 0 ? "Emprise de la zone sélectionnée" : newVal + "km autour du centre géométrique";
+                updateAPI(newVal)
+            });
+        </script>
+
     </div>
 </body>
 
