@@ -162,3 +162,11 @@ input[type=text], select{
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+
+/* ------------------------------------------ MAP ----------------------------------------------------- */
+.map{
+    width : 70vh;
+    height : 70vh;
+}
+
