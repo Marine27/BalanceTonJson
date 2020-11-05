@@ -12,14 +12,8 @@ var fetch = require('node-fetch');
 var https = require('https');
 var cors = require('cors');
 var bodyParser = require('body-parser');
-const { read } = require('fs');
 
-/*var corsOptions = {
-    origin: 'https://acanetti.github.io/',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}*/
-
-//app.options('*', cors()) // Enabling CORS Pre-Flight
+// use all route definitions and all origin
 app.use(cors({ origin: '*' }));
 
 //serves static files
