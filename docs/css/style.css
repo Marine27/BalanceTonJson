@@ -112,6 +112,7 @@ margin-top : 0 ;
 #rayon{
     display: none;
 }
+/* ------------------------------------------ pop-up ----------------------------------------------------- */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -140,9 +141,12 @@ margin-top : 0 ;
 
 }
 #myDropdown4{
-  margin-top: -3%;
+  margin-top: -4%;
 }
-
+#myDropdown5{
+  margin-left: 20%;
+  margin-top: -4%;
+}
 .button {
   background-color: #e7e7e7;
   border: none;
