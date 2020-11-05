@@ -127,8 +127,9 @@ function importMarkers(data) {
 
     dataMonum.forEach((item) => {
         //console.log(item.attributes.type_archi.concat(item.attributes.immeuble))
-        coords = item.geometry.rings[0][0] // à definir
-            //console.log(coords)
+        var coord = item.geometry.rings[0][0] // à definir
+        coords = [coord[1],coord[0]]
+        //console.log(coords)
         let station = map.addMarker(coords,
             item.attributes.type_archi.concat(item.attributes.immeuble),
             item.attributes.stationcode,
