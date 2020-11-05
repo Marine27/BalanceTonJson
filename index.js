@@ -94,7 +94,7 @@ function apiVelib(kargs, json) {
 
     }
     if (kargs.maxbike != null) {
-        data = data.filter(x => x["numbikesavailable"] <= kargsf.maxbike);
+        data = data.filter(x => x["numbikesavailable"] <= kargs.maxbike);
 
     }
 

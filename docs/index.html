@@ -31,27 +31,27 @@
 
         <div class="terminal">
             <div class="headterminal">
-              <div id="myDropdown3" class="dropdown-content">
-                  <h1> Type de monuments </h1>
-                  <a>
-                      <select name="Monument" id="monument">
-                          <option value="0"> Petit monument</option>
-                          <option value="1"> Patrimoine civil</option>
-                          <option value="2"> Edifice religieux</option>
-                          <option value="3"> Patrimoine industriel et architectural</option>
-                          <option value="4"> Patrimoine lié aux activités</option>
-                          <option value="5"> Edifice public</option>
-                          <option value="7"> Site à caractère militaire</option>
-                          <option value="8"> Parc et jardin </option>
-                          <option value="9"> Château et demeure </option>
-                          <option value="10"> Patrimoine rural </option>
-                          <option value="11"> Vestige archéologique </option>
-                      </select>
-                      <br>
-                      <br><button href="#bouton_monument" class="button"> Ok </button>
-                  </a>
+                <div id="myDropdown3" class="dropdown-content">
+                    <h1> Type de monuments </h1>
+                    <a>
+                        <select name="Monument" id="archi">
+                        <option value="Tous">Tous les monuments</option>
+                        <option value="Petit monument">Petits monuments</option>
+                        <option value="Patrimoine civil">Patrimoine civil</option>
+                        <option value="Edifice religieux">Edifices religieux</option>
+                        <option value="Patrimoine industriel et architectural">Patrimoine industriel et architectural</option>
+                        <option value="Patrimoine lié aux activités">Patrimoine lié aux activités</option>
+                        <option value="Edifice public">Edifices publics</option>
+                        <option value="Site à caractère militaire">Sites à caractère militaire</option>                          <option value="Parc et jardin">Parcs et jardins</option>
+                        <option value="Château et demeure">Châteaux et demeures</option>
+                        <option value="Patrimoine rural">Patrimoine rural</option>
+                        <option value="Vestige archéologique">Vestige archéologique</option>
+                    </select>
+                        <br><br>
+                        <button class="button" onclick="valid_archi()"> Ok </button>
+                    </a>
 
-              </div>
+                </div>
             </div>
             <div id="map" class="areaterminal map"></div>
         </div>
@@ -86,17 +86,17 @@
                 <div id="myDropdown4" class="dropdown-content">
                     <a>
 
-                      <button href="#lien_vers_json" class="button"> Télecharger en JSON </button><br></a>
+                        <button href="#lien_vers_json" class="button"> Télecharger en JSON </button><br></a>
                     <a>
-                      <label for="lien_permanent">Lien permanent : </label><br>
+                        <label for="lien_permanent">Lien permanent : </label><br>
 
-                      <input type='text' class="lien_json" id='lien_json' placeholder="URL" />
+                        <input type='text' class="lien_json" id='lien_json' placeholder="URL" />
                     </a>
                 </div>
                 <div id="myDropdown5" class="dropdown-content">
                     <a>
                         <button href="#lien_vers_rfd" class="button">  Télecharger en RFD </button></a>
-                      <a>
+                    <a>
                         <label for="lien_permanent">Lien permanent : </label><br>
                         <input type='text' class="lien_rfd" id='lien_rfd' placeholder="URL" />
                     </a>
@@ -121,7 +121,7 @@
                 radius: 1000,
                 minbike: 1,
                 maxbike: 500,
-                archi: 1000
+                archi: "Tous"
             };
             console.log(params.lat, params.long, params.radius);
 
@@ -136,8 +136,10 @@
                 url += 'locations?'
                 url += 'lon=' + params.long + '&lat=' + params.lat
                 url += '&radial=' + params.radius
-                    //url += '&minbike='+ params.minbike + '&maxbike=' + params.maxbike 
-                    //url += '&archi=' + params.archi
+                url += '&minbike=' + params.minbike + '&maxbike=' + params.maxbike
+                if (params.archi != "Tous") {
+                    url += '&archi=' + params.archi
+                }
                 fetch(url, {
                     method: 'get',
                     headers: myHeaders
@@ -181,6 +183,12 @@
                 params.minbike = parseInt(document.getElementById("minbike").value);
                 params.maxbike = parseInt(document.getElementById("maxbike").value);
                 console.log(params.minbike, params.maxbike);
+                updateAPI();
+            }
+
+            function valid_archi() {
+                params.archi = document.getElementById("archi").value;
+                console.log(params.archi);
                 updateAPI();
             }
         </script>
