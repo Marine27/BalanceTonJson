@@ -31,18 +31,27 @@
 
         <div class="terminal">
             <div class="headterminal">
-                <div id="myDropdown1" class="dropdown-content">
-                    <h1> Localisation </h1>
-                    <a>
-                        <input type='text' class="adresse_form" id='address' placeholder="Adresse de départ" />
-                        <br>
-                        <label for="radius">Rayon de recherche</label>
-                        <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
-                        <small id="radius-val" class="form-text text-muted">1km</small>
-                        <br><br>
-                        <button class="button" onclick="valid_localisation()"> Ok </button>
-                    </a>
-                </div>
+              <div id="myDropdown3" class="dropdown-content">
+                  <h1> Type de monuments </h1>
+                  <a>
+                      <select name="Monument" id="monument">
+                          <option value="0"> Petit monument</option>
+                          <option value="1"> Patrimoine civil</option>
+                          <option value="2"> Edifice religieux</option>
+                          <option value="3"> Patrimoine industriel et architectural</option>
+                          <option value="4"> Patrimoine lié aux activités</option>
+                          <option value="5"> Edifice public</option>
+                          <option value="7"> Site à caractère militaire</option>
+                          <option value="8"> Parc et jardin </option>
+                          <option value="9"> Château et demeure </option>
+                          <option value="10"> Patrimoine rural </option>
+                          <option value="11"> Vestige archéologique </option>
+                      </select>
+                      <br>
+                      <br><button href="#bouton_monument" class="button"> Ok </button>
+                  </a>
+
+              </div>
             </div>
             <div id="map" class="areaterminal map"></div>
         </div>
@@ -60,32 +69,36 @@
                         <button class="button" onclick="valid_bike()"> Ok </button>
                     </a>
                 </div>
-                <div id="myDropdown3" class="dropdown-content">
-                    <h1> Type de monuments </h1>
+                <div id="myDropdown1" class="dropdown-content">
+                    <h1> Localisation </h1>
                     <a>
-                        <select name="Monument" id="monument">
-                <option value="m1"> type monument 1</option>
-                <option value="m2"> type monument 2</option>
-                <option value="m3"> type monument 3</option>
-                <option value="m4"> type monument 4</option>
-              </select>
+                        <input type='text' class="adresse_form" id='address' placeholder="Adresse de départ" />
                         <br>
-                        <br><button href="#bouton_monument" class="button"> Ok </button>
+                        <label for="radius">Rayon de recherche</label>
+                        <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
+                        <small id="radius-val" class="form-text text-muted">1km</small>
+                        <br><br>
+                        <button class="button" onclick="valid_localisation()"> Ok </button>
                     </a>
-
                 </div>
             </div>
-
             <div class="choosefiles">
                 <div id="myDropdown4" class="dropdown-content">
                     <a>
-                        <button href="#lien_vers_json" class="button"> Télecharger en JSON </button>
+
+                      <button href="#lien_vers_json" class="button"> Télecharger en JSON </button><br></a>
+                    <a>
+                      <label for="lien_permanent">Lien permanent : </label><br>
+
+                      <input type='text' class="lien_json" id='lien_json' placeholder="URL" />
                     </a>
                 </div>
-                <br>
                 <div id="myDropdown5" class="dropdown-content">
                     <a>
-                        <button href="#lien_vers_rfd" class="button">  Télecharger en RFD </button>
+                        <button href="#lien_vers_rfd" class="button">  Télecharger en RFD </button></a>
+                      <a>
+                        <label for="lien_permanent">Lien permanent : </label><br>
+                        <input type='text' class="lien_rfd" id='lien_rfd' placeholder="URL" />
                     </a>
                 </div>
 
