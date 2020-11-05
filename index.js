@@ -14,7 +14,12 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 const { read } = require('fs');
 
-app.options('*', cors()) // Enabling CORS Pre-Flight
+var corsOptions = {
+    origin: 'https://acanetti.github.io/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+//app.options('*', cors()) // Enabling CORS Pre-Flight
 
 //serves static files
 app.use(express.static('docs'));
@@ -25,7 +30,7 @@ app.use(bodyParser.json());
 //ROUTES
 
 //Velib stations requete
-app.get("/velibstations", function(req, res) {
+app.get("/velibstations", cors(corsOptions), function(req, res) {
     fetch(velibJson)
         .then(res => res.json())
         .then(json => {
@@ -37,7 +42,7 @@ app.get("/velibstations", function(req, res) {
 
 
 //Monuments requete
-app.get("/monuments", function(req, res) {
+app.get("/monuments", cors(corsOptions), function(req, res) {
     fetch(monumentJson)
         .then(res => res.json())
         .then(json => {
@@ -52,7 +57,7 @@ app.listen(port, function() {
 })
 
 //Locations monuments and velib sations requete
-app.get("/locations", function(req, res) {
+app.get("/locations", cors(corsOptions), function(req, res) {
 
     Promise.all([
         fetch(velibJson),
