@@ -78,7 +78,7 @@
                         <input type="range" class="custom-range" id="radius" min="1" max="50" value="1" />
                         <small id="radius-val" class="form-text text-muted">1km</small>
                         <br><br>
-                        <button class="button" onclick="valid_localisation()"> Ok </button>
+                        <button class="button" onclick="valid_localisation(iptAddress)"> Ok </button>
                     </a>
                 </div>
             </div>
@@ -128,6 +128,7 @@
             if ($map != null) {
                 initMap([params.lat, params.long]);
             }
+
             //update the api
             function updateAPI() {
                 let myHeaders = new Headers();
@@ -149,15 +150,7 @@
                     console.log('data from api:', data.data);
                     importMarkers(data.data);
                 });
-            }
-
-            // convert address to gps coordinates
-            function getCoords(address) {
-                let openStreetMapGeocoder = GeocoderJS.createGeocoder('openstreetmap');
-                openStreetMapGeocoder.geocode(address, function(result) {
-                    params.lat = result[0].latitude;
-                    params.long = result[0].longitude;
-                });
+                document.getElementById("lien_json").value = "https://balance-ton-json.herokuapp.com/" + url
             }
 
             // Address selection
@@ -172,24 +165,40 @@
                 params.radius = radius * 1000
             });
 
-            function valid_localisation() {
-                iptAddress.setAttribute('value', 'Paris');
-                getCoords(iptAddress.value);
-                console.log(params.lat, params.long, params.radius);
-                updateAPI();
+            function valid_localisation(iptAddress) {
+                new Promise((resolve, reject) => {
+                    let openStreetMapGeocoder = GeocoderJS.createGeocoder('openstreetmap');
+                    iptAddress.setAttribute('value', 'Paris');
+                    openStreetMapGeocoder.geocode(iptAddress.value, (result) => {
+                        params.lat = result[0].latitude;
+                        params.long = result[0].longitude;
+                        resolve();
+                    });
+                }).then(() => {
+                    console.log(params.lat, params.long, params.radius);
+                    updateAPI();
+                });
             }
 
             function valid_bike() {
-                params.minbike = parseInt(document.getElementById("minbike").value);
-                params.maxbike = parseInt(document.getElementById("maxbike").value);
-                console.log(params.minbike, params.maxbike);
-                updateAPI();
+                new Promise((resolve, reject) => {
+                    params.minbike = parseInt(document.getElementById("minbike").value);
+                    params.maxbike = parseInt(document.getElementById("maxbike").value);
+                    resolve();
+                }).then(() => {
+                    console.log(params.minbike, params.maxbike);
+                    updateAPI();
+                });
             }
 
             function valid_archi() {
-                params.archi = document.getElementById("archi").value;
-                console.log(params.archi);
-                updateAPI();
+                new Promise((resolve, reject) => {
+                    params.archi = document.getElementById("archi").value;
+                    resolve();
+                }).then(() => {
+                    console.log(params.archi);
+                    updateAPI();
+                });
             }
         </script>
 
