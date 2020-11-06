@@ -55,4 +55,4 @@ Explication pour une requête: GET /velib renvoie la collection des stations vel
 
 ## URL permettent de récupérer les données
 
-https://balance-ton-json.herokuapp.com/api?lat=48.858370&lon=2.294481&radial=900
+https://balance-ton-json.herokuapp.com/locations?lat=48.858370&lon=2.294481&radial=900
