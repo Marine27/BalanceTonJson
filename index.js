@@ -53,7 +53,9 @@ app.listen(port, function() {
 
 //Locations monuments and velib sations requete
 app.get("/locations", function(req, res) {
-
+    if (req.query.download) {
+        res.set("Content-Disposition", "attachment;filename=locations.json");
+    }
     Promise.all([
         fetch(velibJson),
         fetch(monumentJson)

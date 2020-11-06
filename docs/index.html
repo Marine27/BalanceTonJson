@@ -86,11 +86,11 @@
                 <div id="myDropdown4" class="dropdown-content">
                     <a>
 
-                        <button href="#lien_vers_json" class="button"> Télecharger en JSON </button><br></a>
+                        <button id="download_json" class="button"> Télecharger en JSON </button><br></a>
                     <a>
                         <label for="lien_permanent">Lien permanent : </label><br>
-
-                        <input type='text' class="lien_json" id='lien_json' placeholder="URL" />
+                        <input type='text' class="lien_json" id='lien_json' placeholder="URL" disabled />
+                        <button id="copy_json_url" class="button"> Copier l'URL </button><br></a>
                     </a>
                 </div>
                 <div id="myDropdown5" class="dropdown-content">
@@ -98,7 +98,7 @@
                         <button href="#lien_vers_rfd" class="button">  Télecharger en RFD </button></a>
                     <a>
                         <label for="lien_permanent">Lien permanent : </label><br>
-                        <input type='text' class="lien_rfd" id='lien_rfd' placeholder="URL" />
+                        <input type='text' class="lien_rfd" id='lien_rfd' placeholder="URL" disabled />
                     </a>
                 </div>
 
@@ -109,8 +109,8 @@
         <script type="text/javascript" src="js/utils.js"></script>
         <script type="text/javascript" src="js/geocoder.js"></script>
         <script type="text/javascript" src="js/menu.js"></script>
-        <script src="js/vendor.js"></script>
-        <script src="js/map.js"></script>
+        <script type="text/javascript" src="js/vendor.js"></script>
+        <script type="text/javascript" src="js/map.js"></script>
         <script>
             let $map = document.querySelector('#map')
             let map = null
@@ -150,7 +150,7 @@
                     console.log('data from api:', data.data);
                     importMarkers(data.data);
                 });
-                document.getElementById("lien_json").value = "https://balance-ton-json.herokuapp.com/" + url
+                document.getElementById("lien_json").value = "https://balance-ton-json.herokuapp.com" + url
             }
 
             // Address selection
@@ -200,6 +200,24 @@
                     updateAPI();
                 });
             }
+
+            document.getElementById("download_json").onclick = (ev) => {
+                console.log(document.getElementById("lien_json").value)
+                window.location.href = document.getElementById("lien_json").value + '&download=true'
+            };
+
+            function copyToClipboard(str) {
+                const el = document.createElement('textarea');
+                el.value = str;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+            }
+
+            document.getElementById("copy_json_url").onclick = (ev) => {
+                copyToClipboard(document.getElementById("lien_json").value)
+            };
         </script>
 
     </div>
