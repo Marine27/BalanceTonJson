@@ -123,6 +123,18 @@ app.get("/locations", function(req, res) {
 })
 
 
+app.get("/scheme_rdf", function(req, res) {
+    res.format({
+        'application/xml+rdf': function () {
+            let xml_rdf = send_scheme_rdf()
+            res.send(xml_rdf)
+        },
+        default: function () {
+            res.status(406).send('Not Acceptable')
+        }
+    })
+})
+
 
 // Function for app.get/ post request //
 // ============================================== //
@@ -290,3 +302,94 @@ function send_xml_locations(data_velib,data_monuments,head){
     rdf += " \t </balancetonsjon:locations> \n"
     return rdf
 }
+
+function send_scheme_rdf() {
+    var rdfscheme = "<?xml version=\"1.0\"?>\n\n"
+    rdfscheme += "    <rdf:RDF xmlns:rdf=\"#\" xmlns:rdfs=\"#\" xmlns:dc=\"\">\n\n   "
+    rdfscheme += "<rdfs:Class rdf:about=\"mondomain/rdfvocabulary#Velibstations\">\n     "
+    rdfscheme += "<rdfs:label xml:lang=\"fr\">Velibstations</rdfs:label>\n        "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">stationement des vélos libre service dans la région ile-de-france</rdfs:comment>\n "
+    rdfscheme += " <rdfs:Class/>\n        </rdfs:Class>\n     "
+    rdfscheme += "<rdfs:Class rdf:about=\"/rdfvocabulary#ebike\">\n      "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">ebike</rdfs:label>\n      "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Le nombre de vélos électriques</rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#capacity\">\n     "
+    rdfscheme += "rdfs:label xlm:lang = \"en\">capacity</rdfs:label>\n     "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">La capacité maximale de vélibs pouvant être accueilli à la station</rdfs:comment>\n "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#name\">\n  "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">name</rdfs:label>\n     "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Le nom de la station</rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#nom_arrondissement_communes\">\n    "
+    rdfscheme += "<rdfs:label xlm:lang = \"fr\">nom_arrondissement_communes</rdfs:label>\n     "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Nom de la commune /  de l'arrondissement</rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#numbikesavailable\">\n    "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">numbikesavailable</rdfs:label>\n    "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Le nombre de vélos disponibles</rdfs:comment>\n  "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#is_installed\">\n    "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">is_installed</rdfs:label>\n     "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Savoir si la station de vélib est en service</rdfs:comment>\n  "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#is_renting\">\n     "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">is_renting</rdfs:label>\n    "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Savoir si la station permet l'emprunt de Vélibs</rdfs:comment>\n     "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#mechanical\">\n      "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">mechanical</rdfs:label>\n      "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Nombre de vélos sans assistance éléctrique présents</rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#stationcode\">\n    "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">stationcode</rdfs:label>\n     "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Identifiant de la station</rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#coordonnees_geo\">\n    "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">coordonnees_geo</rdfs:label>\n    "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Coordonées de la station</rdfs:comment>\n  "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#numdocksavailables\">\n    "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">numdocksavailable</rdfs:label>\n     "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Nombre de vélos disponibles (éléctrique et non éléctrique)</rdfs:comment>\n  "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#duedate\">\n  "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">duedate</rdfs:label>\n    "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Date de mise à jour des données</rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#is_returning\">\n     "
+    rdfscheme += "<rdfs:label xlm:lang = \"en\">is_returning</rdfs:label>\n       "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Savoir si  la station permet le retour de Vélibs</rdfs:comment>\n  "
+    rdfscheme += "</rdfs:Class>\n"
+    rdfscheme += "<rdfs:Class rdf:about=\"mondomain/rdfvocabulary#Monuments\">\n    "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Monuments\"</rdfs:label>\n       "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Les monuments dans la région ile-de-france</rdfs:comment>\n  "
+    rdfscheme += "</rdfs:Class>\n\n        <rdfs:Class rdf:about=\"mondomain/rdfvocabulary#Geometry_Ring\">\n   "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Geometry_Ring</rdfs:label>\n      "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> .... </rdfs:comment>\n     "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"mondomain/rdfvocabulary#Type_archi\">\n    "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Type_archi</rdfs:label>\n         "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Type d'achitecture du monument </rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#Type_prot\">\n      "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Type_prot</rdfs:label>\n       "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Type .... </rdfs:comment>\n    "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#Protection\">\n     "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Protection</rdfs:label>\n      "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> .... </rdfs:comment>\n    "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#Inseeimmeu\">\n   "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Inseeimmeu</rdfs:label>\n    "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> .... </rdfs:comment>\n     "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#Lien_merim\">\n  "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Lien_merim</rdfs:label>\n      "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> .... </rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#Merimimm\">\n    "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Merimimm</rdfs:label>\n     "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> .... </rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#Nomcom\">\n    "
+    rdfscheme += "<rdfs:label xml:lang=\"fr\">Nomcom</rdfs:label>\n  "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Nom de la commune</rdfs:comment>\n    "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"/rdfvocabulary#ObjectID\">\n     "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">ObjectID</rdfs:label>\n    "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\"> .... </rdfs:comment>\n   "
+    rdfscheme += "</rdfs:Class>\n"
+    rdfscheme += "<rdfs:Class rdf:about=\"mondomain/rdfvocabulary#Locations\">\n   "
+    rdfscheme += "<rdfs:label xml:lang=\"en\">Locations</rdfs:label>\n       "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Localisation d'une adresse </rdfs:comment>\n    "
+    rdfscheme += "</rdfs:Class>\n        <rdfs:Class rdf:about=\"mondomain/rdfvocabulary#coordonnees_geo\">\n  "
+    rdfscheme += "<rdfs:label xml:lang=\"fr\">coordonnees_geo</rdfs:label>\n   "
+    rdfscheme += "<rdfs:comment xml:lang=\"fr\">Les coordonnées géographique d'une adresse </rdfs:comment>\n "
+    rdfscheme += "</rdfs:Class>"
+
+    return rdfscheme
+}
+
+
