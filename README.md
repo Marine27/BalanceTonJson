@@ -11,7 +11,7 @@
 - RANDRIANJANAHARY Sariaka
 
 ### Encadrant:
-- Antoine Seilles : https://github.com/natoine
+- SEILLES Antoine : https://github.com/natoine
 
 
 ## Page du site "Le Vélotour Culturel Parisien":
@@ -22,12 +22,14 @@
 
 
 """
+
 - Requête pour récuperer les monuments de Paris:  
     GET /monuments
  - Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:  
      GET /velibstations
  - Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens, peut-être utilisé également avec des paramétres afin d'obtenir les données souhaitées (minbike,maxbike,lon,lat,radial,monument,arrondissement):  
      GET /locations
+     
  """
 
 * Requête sur la première source de données:
