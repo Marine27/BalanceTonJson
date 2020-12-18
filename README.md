@@ -1,5 +1,6 @@
 # Projet Open Data : Le Vélotour Culturel Parisien (à modifier avec vrai titre)
 
+* V3FMI5 - Open Data et Web des données SHS
 
 ### Les membres de l'équipe:
 - BOBO Florian
@@ -10,8 +11,8 @@
 - RANDRIANJANAHARY Sariaka
 
 ### Encadrant:
--Antoine Seilles : https://github.com/natoine
-* V3FMI5 - Open Data et Web des données SHS
+- Antoine Seilles : https://github.com/natoine
+
 
 ## Page du site "Le Vélotour Culturel Parisien":
 
