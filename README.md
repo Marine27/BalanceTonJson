@@ -49,6 +49,12 @@ Permet de récupérer l'ensemble des stations de Vélibs et des monuments parisi
 
 Explication pour une requête: GET /Vélib renvoie la collection des stations Vélib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les données au format json. La requête utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données.
 
+
+* Requête pour structure rdf :
+
+Format Xml: https://balance-ton-json.herokuapp.com/scheme_rdf
+Permet de récupérer le xml contenant la structure du schéma rdf 
+
 ## Description du Projet
 
 ### Source de nos données
