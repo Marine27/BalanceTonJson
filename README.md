@@ -11,7 +11,7 @@
 
 ##### Encadrant:
 -Antoine Seilles : https://github.com/natoine
-⋅⋅⋅⋅⋅⋅*V3FMI5 - Open Data et Web des données SHS
+⋅⋅* V3FMI5 - Open Data et Web des données SHS
 
 ## Page du site "Le Vélotour Culturel Parisien":
 
