@@ -38,7 +38,7 @@ app.get("/velibstations", function(req, res) {
                 },
 
                 'application/xml+rdf': function () {
-                    let xml_rdf= send_xml_velibstations(data, '/velibstations')
+                    let xml_rdf= send_xml_velibstations(data)
                     res.send(xml_rdf)
                 },
 
@@ -62,7 +62,7 @@ app.get("/monuments", function(req, res) {
                     res.send(data)
                 },
                 'application/xml+rdf': function () {
-                    let xml_rdf= send_xml_monuments(data, '/monuments')
+                    let xml_rdf= send_xml_monuments(data)
                     res.send(xml_rdf)
                 },
 
@@ -99,8 +99,15 @@ app.get("/locations", function(req, res) {
 
         data[0] = apiVelib(req.query, data[0]);
         data[1] = apiMonument(req.query, data[1]);
-        res.format({
+        if (req.query.xml != null){
+            if (req.query.xml === 'true'){
+                let xml_rdf=send_xml_locations(data[0],data[1]) ;
+                res.send(xml_rdf)
 
+            }
+
+        }
+        res.format({
 
             'application/json': function () {
                 let dataset = {
@@ -109,10 +116,12 @@ app.get("/locations", function(req, res) {
                 };
                 res.send(dataset);
             },
+
             'application/xml+rdf': function () {
                 let xml_rdf=send_xml_locations(data[0],data[1],req.originalUrl)
                 res.send(xml_rdf)
             },
+
 
             default: function () {
                 res.status(406).send('Not Acceptable')
@@ -271,10 +280,10 @@ function xml_velibstations(rdf, data) {
     return rdf
 }
 
-function send_xml_velibstations(data,head){
+function send_xml_velibstations(data){
     let rdf = '<?xml version="1.0"?>\n'
      rdf +="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:si=\"https://www.w3schools.com/rdf/\""
-     rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+head+ "\">\n"
+     rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+ "/scheme_rdf"+ "\">\n"
      rdf += " \t <balancetonsjon:velibstations> \n"
      rdf = xml_velibstations(rdf,data)
      rdf += " \t </balancetonsjon:velibstations> \n"
@@ -282,10 +291,10 @@ function send_xml_velibstations(data,head){
 
 }
 
-function send_xml_monuments(data,head){
+function send_xml_monuments(data){
     let rdf = '<?xml version="1.0"?>\n'
     rdf +="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:si=\"https://www.w3schools.com/rdf/\""
-    rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+head+ "\">\n"
+    rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+ "/scheme_rdf"+ "\">\n"
     rdf += " \t <balancetonsjon:monuments> \n"
     rdf = xml_monuments(rdf,data)
     rdf += " \t </balancetonsjon:monuments>\n"
@@ -295,10 +304,10 @@ function send_xml_monuments(data,head){
 
 }
 
-function send_xml_locations(data_velib,data_monuments,head){
+function send_xml_locations(data_velib,data_monuments){
     let rdf = '<?xml version="1.0"?>\n'
     rdf +="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:si=\"https://www.w3schools.com/rdf/\""
-    rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+head+ "\">\n"
+    rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+"/scheme_rdf"+ "\">\n"
     rdf += " \t <balancetonsjon:locations> \n"
     rdf = xml_velibstations(rdf,data_velib)
     rdf += xml_monuments(rdf,data_monuments)
@@ -309,8 +318,8 @@ function send_xml_locations(data_velib,data_monuments,head){
 function send_scheme_rdf() {
     var rdfscheme = "<?xml version=\"1.0\"?>\n\n"
     rdfscheme += "    <rdf:RDF xmlns:rdf=\"#\" xmlns:rdfs=\"#\" xmlns:dc=\"\">\n\n   "
-    rdfscheme += "<rdfs:Class rdf:about=\"mondomain/rdfvocabulary#Velibstations\">\n     "
-    rdfscheme += "<rdfs:label xml:lang=\"fr\">velibstations</rdfs:label>\n        "
+    rdfscheme += "<rdfs:Class rdf:about=\"mondomain/rdfvocabulary#velibstation\">\n     "
+    rdfscheme += "<rdfs:label xml:lang=\"fr\">velibstation</rdfs:label>\n        "
     rdfscheme += "<rdfs:comment xml:lang=\"fr\">stationement des vélos libre service dans la région ile-de-france</rdfs:comment>\n "
     rdfscheme += " <rdfs:Class/>\n        </rdfs:Class>\n     "
     rdfscheme += "<rdfs:Class rdf:about=\"/rdfvocabulary#ebike\">\n      "
@@ -353,7 +362,7 @@ function send_scheme_rdf() {
     rdfscheme += "<rdfs:label xlm:lang = \"en\">is_returning</rdfs:label>\n       "
     rdfscheme += "<rdfs:comment xml:lang=\"fr\"> Savoir si  la station permet le retour de Vélibs</rdfs:comment>\n  "
     rdfscheme += "</rdfs:Class>\n"
-    rdfscheme += "<rdfs:Class rdf:about=\"mondomain/rdfvocabulary#monuments\">\n    "
+    rdfscheme += "<rdfs:Class rdf:about=\"mondomain/rdfvocabulary#monument\">\n    "
     rdfscheme += "<rdfs:label xml:lang=\"en\">monuments\"</rdfs:label>\n       "
     rdfscheme += "<rdfs:comment xml:lang=\"fr\">Les monuments dans la région ile-de-france</rdfs:comment>\n  "
     rdfscheme += "</rdfs:Class>\n\n        <rdfs:Class rdf:about=\"mondomain/rdfvocabulary#coordonnees_geo\">\n   "
