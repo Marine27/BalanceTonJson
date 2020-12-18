@@ -1,7 +1,7 @@
 # Projet Open Data : Le Vélotour Culturel Parisien (à modifier avec vrai titre)
 
 
-## Les membres de l'équipe:
+### Les membres de l'équipe:
 - BOBO Florian
 - BOUJEMAOUI Ali
 - Canetti Axel-Bryan
@@ -9,23 +9,25 @@
 - PLA-COMES Marine
 - RANDRIANJANAHARY Sariaka
 
-##### Encadrant:
+### Encadrant:
 -Antoine Seilles : https://github.com/natoine
 * V3FMI5 - Open Data et Web des données SHS
 
 ## Page du site "Le Vélotour Culturel Parisien":
 
-GitHubPages: https://acanetti.github.io/BalanceTonJson/
 * Page Heroku: https://balance-ton-json.herokuapp.com/
 
 ## API du "Vélotour Culturel Parisien":
 
+
+"""
 - Requête pour récuperer les monuments de Paris:  
     GET /monuments
  - Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:  
      GET /velibstations
  - Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens, peut-être utilisé également avec des paramétres afin d'obtenir les données souhaitées (minbike,maxbike,lon,lat,radial,monument,arrondissement):  
      GET /locations
+ """
 
 * Requête sur la première source de données:
 `Exemple: `
@@ -91,5 +93,4 @@ Dans le contexte actuel, qu'on se place d'un point de vue écologique ou d'un po
 
 On voulait réaliser un projet cohérent avec l'epoque actuelle, c'est pour cela que nous nous sommes tournés vers les velib. Nous avons décidé de croiser ces données avec celle des monuments de Paris car la culture est quelque chose qui doit se cultiver en tout temps. L'avantage de nos deux sources de données c'est qu'elles utilisent toute les deux des données géographiques ce qui nous permet de les croiser à l'aide d'un carte afin qu'elles s'enrichissent mutuellement.
 
-
-
+## Méthodes utilisées
