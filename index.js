@@ -99,14 +99,7 @@ app.get("/locations", function(req, res) {
 
         data[0] = apiVelib(req.query, data[0]);
         data[1] = apiMonument(req.query, data[1]);
-        if (req.query.xml != null){
-            if (req.query.xml === 'true'){
-                let xml_rdf=send_xml_locations(data[0],data[1]) ;
-                res.send(xml_rdf)
 
-            }
-
-        }
         res.format({
 
             'application/json': function () {
