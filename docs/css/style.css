@@ -1,7 +1,7 @@
 body {
     background: linear-gradient(#e66465, #9198e5);
     background-image: url('../media/background.png');
-    background-position: center center;
+    background-position: 50% 80%;
     background-attachment: fixed;
     background-size: cover;
 }

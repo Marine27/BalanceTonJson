@@ -96,7 +96,7 @@
 
                 <div id="myDropdown5" class="dropdown-content">
                     <a>
-                        <button href="#lien_vers_rfd" class="button">  Télecharger en RDF </button></a>
+                        <button href="download_xml" class="button">  Télecharger en RDF </button></a>
                     <a>
                         <label for="lien_permanent">Lien permanent : </label><br>
                         <input type='text' class="lien_rfd" id='lien_rfd' placeholder="URL" disabled />
@@ -142,7 +142,7 @@
                 if (params.archi != "Tous") {
                     url += '&archi=' + params.archi
                 }
-                fetch(url, {
+                fetch(url + '&xml=true', {
                     method: 'get',
                     headers: myHeaders
                 }).then(function(response) {
@@ -152,6 +152,19 @@
                     importMarkers(data.data);
                 });
                 document.getElementById("lien_json").value = url
+
+                let myheadersxml = new Headers();
+                myheadersxml.append("accept", "application/xml+rdf");
+                fetch(url, {
+                    method: 'get',
+                    headers: myHeaders
+                }).then(function(response) {
+                    return response.text();
+                }).then(function(data) {
+                    console.log('data from api:', data);
+                    importMarkers(data);
+                });
+                document.getElementById("lien_xml").value = url
             }
 
             // Address selection
@@ -205,6 +218,11 @@
             document.getElementById("download_json").onclick = (ev) => {
                 console.log(document.getElementById("lien_json").value)
                 window.location.href = document.getElementById("lien_json").value + '&download=true'
+            };
+
+            document.getElementById("download_xml").onclick = (ev) => {
+                console.log(document.getElementById("lien_xml").value)
+                window.location.href = document.getElementById("lien_xml").value + '&download=true'
             };
 
             function copyToClipboard(str) {
