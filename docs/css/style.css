@@ -141,11 +141,12 @@ margin-top : 0 ;
 
 }
 #myDropdown4{
-  margin-top: -4%;
+  margin-top: 4%;
+    margin-bottom: 4%;
 }
 #myDropdown5{
-  margin-left: 20%;
-  margin-top: -4%;
+    margin-top: 4%;
+    margin-bottom: 4%;
 }
 .button {
   background-color: #e7e7e7;
