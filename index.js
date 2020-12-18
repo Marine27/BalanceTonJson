@@ -31,11 +31,21 @@ app.get("/velibstations", function(req, res) {
         .then(json => {
             let data = apiVelib(req.query, json);
             console.log("velib get ok");
-            let rdf = '<test>'
-            rdf = xml_velibstations(rdf, data)
-            rdf += '</test>'
-            console.log(rdf)
-            res.send(rdf);
+            res.format({
+                'application/json': function () {
+                    res.send(data)
+                },
+
+                'application/xml+rdf': function () {
+                    let xml_rdf= send_xml_velibstations(data, '/velibstations')
+                    res.send(xml_rdf)
+                },
+
+
+                default: function () {
+                    res.status(406).send('Not Acceptable')
+                }
+            })
         });
 })
 
@@ -46,11 +56,21 @@ app.get("/monuments", function(req, res) {
         .then(res => res.json())
         .then(json => {
             let data = apiMonument(req.query, json);
-            console.log("monuments get ok");
-            let rdf = '<test>'
-            rdf = xml_monuments(rdf, data);
-            console.log(rdf);
-            res.send(rdf);
+            res.format({
+                'application/json': function () {
+                    res.send(data)
+                },
+                'application/xml+rdf': function () {
+                    let xml_rdf= send_xml_monuments(data, '/monuments')
+                    res.send(xml_rdf)
+                },
+
+
+
+                default: function () {
+                    res.status(406).send('Not Acceptable')
+                }
+            })
         });
 })
 
@@ -78,12 +98,26 @@ app.get("/locations", function(req, res) {
 
         data[0] = apiVelib(req.query, data[0]);
         data[1] = apiMonument(req.query, data[1]);
+        res.format({
 
-        let dataset = {
-            'data': { 'monuments': data[1], 'station_velib': data[0] },
-            'param': { 'monuments': monfields, 'station_velib': velfields }
-        };
-        res.send(dataset);
+
+            'application/json': function () {
+                let dataset = {
+                    'data': { 'monuments': data[1], 'station_velib': data[0] },
+                    'param': { 'monuments': monfields, 'station_velib': velfields }
+                };
+                res.send(dataset);
+            },
+            'application/xml+rdf': function () {
+                let xml_rdf=send_xml_locations(data[0],data[1],req.originalUrl)
+                res.send(xml_rdf)
+            },
+
+            default: function () {
+                res.status(406).send('Not Acceptable')
+            }
+        })
+
     })
 
 })
@@ -177,7 +211,7 @@ function CoordDist(lat1, lng1, lat2, lng2) {
 function xml_monuments(rdf, data) {
 
     data.forEach(function(x) {
-        rdf += ' \t \t <balancetonjson:monuments> \n '
+        rdf += ' \t \t <balancetonjson:monument> \n '
         rdf += ' \t \t \t <balancetonjson:type_archi>' + x.attributes.type_archi + '</balancetonjson:type_archi> \n '
         rdf += ' \t \t \t <balancetonjson:type_prot> ' + x.attributes.type_prot + ' </balancetonjson:type_prot> \n '
         rdf += ' \t \t \t <balancetonjson:protection>' + x.attributes.protection + '  </balancetonjson:protection> \n'
@@ -186,11 +220,11 @@ function xml_monuments(rdf, data) {
         rdf += ' \t \t \t <balancetonjson:merimimm>' + x.attributes.merimimm + '</balancetonjson:merimimm> \n'
         rdf += ' \t \t \t <balancetonjson:nomcom>' + x.attributes.nomcom + '</balancetonjson:nomcom> \n'
         rdf += ' \t \t \t <balancetonjson:object_id>' + x.attributes.object_id + '</balancetonjson:object_id> \n '
-        rdf += ' \t \t \t <balancetonjson:locations> \n'
+        rdf += ' \t \t \t <balancetonjson:coordonnees_geo> \n'
         rdf += '\t \t \t \t <balancetonjson:latitude>' + x.geometry.rings[0][0][1] + ' </balancetonjson:latitude> \n'
         rdf += '\t \t \t \t <balancetonjson:longitude>' + x.geometry.rings[0][0][0] + ' </balancetonjson:longitude> \n'
-        rdf += ' \t \t \t </balancetonjson:locations> \n'
-        rdf += ' \t \t </balancetonjson:monuments> \n '
+        rdf += ' \t \t \t </balancetonjson:coordonnees_geo> \n'
+        rdf += ' \t \t </balancetonjson:monument> \n '
     })
     return rdf;
 
@@ -199,7 +233,7 @@ function xml_monuments(rdf, data) {
 function xml_velibstations(rdf, data) {
 
     data.forEach(function(x) {
-        rdf += '\t \t <balancetonjson:velibstations> \n '
+        rdf += '\t \t <balancetonjson:velibstation> \n '
         rdf += '\t \t \t <balancetonjson:ebike> ' + x.ebike + ' </balancetonjson:ebike> \n'
         rdf += '\t \t \t <balancetonjson:capacity>' + x.capacity + '</balancetonjson:capacity>\n'
         rdf += '\t \t \t <balancetonjson:name>' + x.name + ' </balancetonjson:name>\n'
@@ -212,12 +246,47 @@ function xml_velibstations(rdf, data) {
         rdf += '\t \t \t <balancetonjson:numdocksavailable>' + x.numdocksavailable + '</balancetonjson:numdocksavailable>\n'
         rdf += '\t \t \t <balancetonjson:duedate>' + x.duedate + ' </balancetonjson:duedate>\n'
         rdf += '\t \t \t <balancetonjson:is_returning>' + x.is_returning + ' </balancetonjson:is_returning> \n'
-        rdf += '\t \t \t <balancetonjson:location> \n'
+        rdf += '\t \t \t <balancetonjson:coordonnees_geo> \n'
         rdf += '\t \t \t \t <balancetonjson:latitude>' + x.coordonnees_geo[0] + '</balancetonjson:latitude>\n '
         rdf += '\t \t \t \t <balancetonjson:longitude>' + x.coordonnees_geo[1] + ' </balancetonjson:longitude>\n '
-        rdf += '\t \t \t </balancetonjson:location> \n'
-        rdf += '\t \t </balancetonjson:velibstations> \n'
+        rdf += '\t \t \t </balancetonjson:coordonnees_geo> \n'
+        rdf += '\t \t </balancetonjson:velibstation> \n'
     })
 
+    return rdf
+}
+
+function send_xml_velibstations(data,head){
+    let rdf = '<?xml version="1.0"?>\n'
+     rdf +="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:si=\"https://www.w3schools.com/rdf/\""
+     rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+head+ "\">\n"
+     rdf += " \t <balancetonsjon:velibstations> \n"
+     rdf = xml_velibstations(rdf,data)
+     rdf += " \t </balancetonsjon:velibstations> \n"
+     return rdf
+
+}
+
+function send_xml_monuments(data,head){
+    let rdf = '<?xml version="1.0"?>\n'
+    rdf +="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:si=\"https://www.w3schools.com/rdf/\""
+    rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+head+ "\">\n"
+    rdf += " \t <balancetonsjon:monuments> \n"
+    rdf = xml_monuments(rdf,data)
+    rdf += " \t </balancetonsjon:monuments>\n"
+
+    return rdf
+
+
+}
+
+function send_xml_locations(data_velib,data_monuments,head){
+    let rdf = '<?xml version="1.0"?>\n'
+    rdf +="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:si=\"https://www.w3schools.com/rdf/\""
+    rdf += " xmlns:balancetonjson = \"https://balancetonjson.herokuapp.com"+head+ "\">\n"
+    rdf += " \t <balancetonsjon:locations> \n"
+    rdf = xml_velibstations(rdf,data_velib)
+    rdf += xml_monuments(rdf,data_monuments)
+    rdf += " \t </balancetonsjon:locations> \n"
     return rdf
 }
