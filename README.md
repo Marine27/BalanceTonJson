@@ -21,14 +21,12 @@
 ## API du "Paris à vélo":
 
 * Requête sur la première source de données:
-`Exemple: `
 
 Format Json: https://balance-ton-json.herokuapp.com/monuments
 
 Permet de récuperer les monuments de Paris
 
 * Requête sur la deuxième source de données:
-`Exemple: `
 
 Format Json: https://balance-ton-json.herokuapp.com/velibstations
 
