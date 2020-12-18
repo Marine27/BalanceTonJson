@@ -1,17 +1,60 @@
-# Projet Open Data
-
-Cours : V3FMI5 - Open Data et Web des données SHS
-
-Professeur : Antoine Seilles : https://github.com/natoine
-
-Membres du groupe: BOBO Florian, BOUJEMAOUI Ali,
-Canetti Axel-Bryan, CORROËNNE Théophile, PLA-COMES Marine, RANDRIANJANAHARY Sariaka
+# Projet Open Data : Le Vélotour Culturel Parisien (à modifier avec vrai titre)
 
 
+## Les membres de l'équipe:
+- BOBO Florian
+- BOUJEMAOUI Ali
+- Canetti Axel-Bryan
+- CORROËNNE Théophile
+- PLA-COMES Marine
+- RANDRIANJANAHARY Sariaka
+
+##### Encadrant:
+-Antoine Seilles : https://github.com/natoine
+⋅⋅⋅⋅⋅⋅*V3FMI5 - Open Data et Web des données SHS
+
+## Page du site "Le Vélotour Culturel Parisien":
 
 GitHubPages: https://acanetti.github.io/BalanceTonJson/
 
-Page Heroku: https://balance-ton-json.herokuapp.com/
+⋅⋅* Page Heroku: https://balance-ton-json.herokuapp.com/
+
+## API du "Vélotour Culturel Parisien":
+⋅⋅* Requête sur la première source de données:
+- Exemple: `https://balance-ton-json.herokuapp.com/monuments?lat=48.858370&lon=2.294481&radial=900`
+Format Json: 
+Format Xml:
+⋅⋅* Requête sur la deuxième source de données:
+- Exemple: `https://balance-ton-json.herokuapp.com/monuments?lat=48.858370&lon=2.294481&radial=900`
+Format Json: 
+Format Xml:
+⋅⋅* Requête sur les deux sources de données:
+- Exemple: `https://balance-ton-json.herokuapp.com/locations?lat=48.858370&lon=2.294481&radial=900`
+Format Json: 
+Format Xml:
+
+
+## Liste des requêtes:
+
+- Requête pour récuperer les monuments de Paris:  
+    GET /monuments
+ - Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:  
+     GET /velibstations
+ - Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens, peut-être utilisé également avec des paramétres afin d'obtenir les données souhaitées (minbike,maxbike,lon,lat,radial,monument,arrondissement):  
+     GET /locations
+
+
+Explication pour une requête: GET /velib renvoie la collection des stations velib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les données au format json. La requête utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données.
+
+
+## URL permettent de récupérer les données
+
+https://balance-ton-json.herokuapp.com/locations?lat=48.858370&lon=2.294481&radial=900
+
+
+
+
+
 
 ## Description du Projet
 
