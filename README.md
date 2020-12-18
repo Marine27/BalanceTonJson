@@ -20,22 +20,10 @@
 
 ## API du "Paris à vélo":
 
-
-"""
-
-- Requête pour récuperer les monuments de Paris:  
-    GET /monuments
- - Requête pour récuperer les stations de vélibs à Paris ainsi que les données les concernant:  
-     GET /velibstations
- - Requête pour récuperer l'ensemble des Stations de Vélibs et des Monuments parisiens, peut-être utilisé également avec des paramétres afin d'obtenir les données souhaitées (minbike,maxbike,lon,lat,radial,monument,arrondissement):  
-     GET /locations
-     
- """
-
 * Requête sur la première source de données:
 `Exemple: `
 
-Format Json: 
+Format Json: https://balance-ton-json.herokuapp.com/monuments
 
 Format Xml:
 
@@ -44,7 +32,7 @@ Permet de récuperer les monuments de Paris
 * Requête sur la deuxième source de données:
 `Exemple: `
 
-Format Json: 
+Format Json: https://balance-ton-json.herokuapp.com/velibstations
 
 Format Xml:
 
@@ -53,7 +41,7 @@ Permet de récuperer les stations de vélibs à Paris ainsi que les données les
 * Requête sur les deux sources de données:
 `Exemple: https://balance-ton-json.herokuapp.com/velibstations?lat=48.858370&lon=2.294481&radial=900`
 
-Format Json: https://balance-ton-json.herokuapp.com/locations?lat=48.858370&lon=2.294481&radial=900
+Format Json: https://balance-ton-json.herokuapp.com/locations
 
 Format Xml:
 
