@@ -21,20 +21,14 @@
 ## API du "Paris à vélo":
 
 * Requête sur la première source de données:
-`Exemple: `
 
 Format Json: https://balance-ton-json.herokuapp.com/monuments
-
-Format Xml:
 
 Permet de récuperer les monuments de Paris
 
 * Requête sur la deuxième source de données:
-`Exemple: `
 
 Format Json: https://balance-ton-json.herokuapp.com/velibstations
-
-Format Xml:
 
 Permet de récuperer les stations de vélibs à Paris ainsi que les données les concernant
 
@@ -43,12 +37,11 @@ Permet de récuperer les stations de vélibs à Paris ainsi que les données les
 
 Format Json: https://balance-ton-json.herokuapp.com/locations
 
-Format Xml:
-
 Permet de récupérer l'ensemble des stations de Vélibs et des monuments parisiens, peut-être utilisé également avec des paramètres afin d'obtenir les données souhaitées (minbike,maxbike,lon,lat,radial,monument,arrondissement)
 
 Explication pour une requête: GET /Vélib renvoie la collection des stations Vélib à l'aide d'un fetch en respectant les options CORS. Le serveur renvoie les données au format json. La requête utilise apiVelib. __apiVelib__ exécutent plusieurs filtres sur les données.
 
+* Pour requêter au format XML-rdf: requète avec header -> content-type : application/xml+rdf
 
 * Requête pour structure rdf :
 
