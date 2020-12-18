@@ -1,26 +1,27 @@
 {
-    "name": "balancetonjson",
-    "version": "1.0.0",
-    "description": "Croiser les stations velib et les monuments touristiques",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node index.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/acanetti/BalanceTonJson"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/acanetti/BalanceTonJson"
-    },
-    "homepage": "https://acanetti.github.io/BalanceTonJson/index.html",
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "node-fetch": "^2.6.1"
-    }
+  "name": "balancetonjson",
+  "version": "1.0.0",
+  "description": "Croiser les stations velib et les monuments touristiques",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acanetti/BalanceTonJson"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acanetti/BalanceTonJson"
+  },
+  "homepage": "https://acanetti.github.io/BalanceTonJson/index.html",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "file-system": "^2.2.2",
+    "node-fetch": "^2.6.1"
+  }
 }

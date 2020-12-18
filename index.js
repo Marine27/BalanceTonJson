@@ -1,6 +1,7 @@
 'use strict'
 
 let express = require('express');
+var fs = require('file-system');
 let app = express();
 
 
@@ -395,3 +396,18 @@ function send_scheme_rdf() {
 }
 
 
+// Bonus , pdf Schema //
+
+
+app.get("/rdf_schema", function(req, res) {
+    res.format({
+        'application/pdf': function () {
+            var data =fs.readFileSync('rdf_schema.pdf');
+            res.send(data)
+
+        },
+        default: function () {
+            res.status(406).send('Not Acceptable')
+        }
+    })
+})
