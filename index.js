@@ -192,9 +192,11 @@ function degreesToRadians(degrees) {
     return degrees * Math.PI / 180;
 }
 
+// fonction de calcul de distance entre deux points selon coordonnées //
+// source : https://ourcodeworld.com/articles/read/1021/how-to-calculate-the-distance-between-2-markers-coordinates-in-google-maps-with-javascript //
 /**
  * Returns the distance between 2 points of coordinates in Google Maps
- *
+ *@see https://ourcodeworld.com/articles/read/1021/how-to-calculate-the-distance-between-2-markers-coordinates-in-google-maps-with-javascript
  * @see https://stackoverflow.com/a/1502821/4241030
  * @param lat1 Latitude of the point A
  * @param lng1 Longitude of the point A
